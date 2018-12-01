@@ -35,19 +35,8 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
  * V1. Verify response 13/10/18
  * Declare request  14/10/18
  * V2. Handle for new customer, verify customer information from Get Customer Information and from DB
+ * V3. Change new framework for easier maintenance process 01/12/18
  */
-
-//CODE 
-//		println GlobalVariable.Glb_DocumentId
-//		println GlobalVariable.Glb_FirstName
-//		println GlobalVariable.Glb_LastName
-//		println GlobalVariable.Glb_veh_Model
-//		println GlobalVariable.Glb_veh_MakeString
-//		println GlobalVariable.Glb_veh_ManufacturerName
-//		println GlobalVariable.Glb_veh_VehicleId
-//		println GlobalVariable.Glb_ServiceDate
-//		println GlobalVariable.Glb_ServiceEndDate
-
 
 //## PROCESS API
 //Declare request
@@ -97,7 +86,7 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 	//Validate Response Status Code
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyResponseCode_Msg'(res_ProcessServiceVisit, 200, "")
 		GlobalVariable.Glb_BookingStatus = "current"
-	//Validate "Sender" of Application Area
+	//Validate Application Area
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "CreatorNameCode", "GM", 0, 0)
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "SenderNameCode", "OSS", 0, 0)
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
@@ -166,8 +155,8 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Appointment", "AppointmentStatus", "SCHEDULED", 0, 0)
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Appointment", "AlternateTransportation", "WAIT_AT_DEALER", 0, 0)
 		 */
-//		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , 0, 0)
-//		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Appointment", "EndAppointmentDateTime", GlobalVariable.Glb_ServiceEndDate, 0, 0)
+		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , 0, 0)
+		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Appointment", "EndAppointmentDateTime", GlobalVariable.Glb_ServiceEndDate, 0, 0)
 		
 	//Validate Request Service
 		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "RequestedService", "JobNumberString", "A", 0, 0)
