@@ -43,6 +43,12 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 
 class Common extends Library_Method_VinhLe{
+
+	@Keyword
+	void verifyStatusCodeIs200OK(ResponseObject response){
+		verifyResponseCode_Msg(response, 200, "")
+	}
+
 	@Keyword
 	void verifyApplicationAreaResponse(ResponseObject response) {
 		verifyValueSOAPNode(response, "Sender", "CreatorNameCode", "GM", 0, 0)
@@ -50,16 +56,16 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Sender", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
 		verifyValueSOAPNode(response, "Sender", "DealerCountryCode", "US", 0, 0)
 		verifyValueSOAPNode(response, "Sender", "LanguageCode", "en-US", 0, 0)
-		
+
 		verifyValueSOAPNode(response, "Destination", "DestinationNameCode", "QI", 0, 0)
 		verifyValueSOAPNode(response, "Destination", "DestinationSoftwareCode", "QI", 0, 0)
 		verifyValueSOAPNode(response, "Destination", "DestinationSoftware", "QI", 0, 0)
 		verifyValueSOAPNode(response, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
 		verifyValueSOAPNode(response, "Destination", "DealerTargetCountry", "US", 0, 0)
-		
+
 		verifyAttributeSOAPNode(response, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyAcknowledgeServiceAreaResponse(ResponseObject response) {
 		verifyValueSOAPNode(response, "Sender", "CreatorNameCode", "GM", 1, 0)
@@ -67,13 +73,13 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Sender", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 1, 0)
 		verifyValueSOAPNode(response, "Sender", "DealerCountryCode", "US", 1, 0)
 		verifyValueSOAPNode(response, "Sender", "LanguageCode", "en-US", 1, 0)
-		
+
 		verifyValueSOAPNode(response, "Destination", "DestinationNameCode", "QI", 1, 0)
 		verifyValueSOAPNode(response, "Destination", "DestinationSoftwareCode", "QI", 1, 0)
 		verifyValueSOAPNode(response, "Destination", "DestinationSoftware", "QI", 1, 0)
 		verifyValueSOAPNode(response, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 1, 0)
 		verifyValueSOAPNode(response, "Destination", "DealerTargetCountry", "US", 1, 0)
-		
+
 		verifyAttributeSOAPNode(response, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
 	}
 
@@ -94,7 +100,7 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyNewCustomerInformationResponse(ResponseObject response){
 		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
@@ -106,7 +112,7 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyVehicleInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "Vehicle", "Model", GlobalVariable.Glb_veh_modelKey, 0, 0)
@@ -114,48 +120,73 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Vehicle", "MakeString", GlobalVariable.Glb_veh_MakeString, 0, 0)
 		verifyValueSOAPNode(response, "Vehicle", "ManufacturerName", GlobalVariable.Glb_veh_ManufacturerName, 0, 0)
 		verifyValueSOAPNode(response, "Vehicle", "VehicleID", GlobalVariable.Glb_veh_VehicleId, 0, 0)
-		
+
 		verifyAttributeSOAPNode(response, "VehicleInfo", "InDistanceMeasure", "unitCode", "mile", 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyBookingIdResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_Booking_ID, 1, 0)
 	}
-	
+
 	@Keyword
 	void verifyTimeAppointmentInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , 0, 0)
 		verifyValueSOAPNode(response, "Appointment", "EndAppointmentDateTime", GlobalVariable.Glb_ServiceEndDate, 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyGeneralAppointmentJoblineAInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "A", 0, 0)
 		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 0, 0)
-		}
-	
+	}
+
 	@Keyword
 	void verifyGeneralAppointmentJoblineBInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "B", 0, 0)
 		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyJoblineWithOpCodeExistInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
 		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
-		}
-	
+	}
+
 	@Keyword
 	void verifyJoblineWithOpCodeNotExistInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
 		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
-		}
-
-		
+	}
+	
+	@Keyword
+	String setValueRandomWithTimeValue(String globalVariable){
+		if(globalVariable.toLowerCase()=='fname')
+			return 'QATEAM_VINHLE'+ getDateFormat('yyMMddHHmmss')
+		if(globalVariable.toLowerCase()=='lname')
+			return 'HOLDEN'+ getDateFormat('yyMMddHHmmss')
+		if(globalVariable.toLowerCase()=='rego')
+			return 'REGNUMBER'+ getDateFormat('yyMMddHHmmss')
+		if(globalVariable.toLowerCase()=='vin')
+			return 'VNVNV'+ getDateFormat('yyMMddHHmmss')
+	}
+	
+	@Keyword
+	String setValueDateForEachCasesWithAUTimeZone(Object valueCase, String formatDate){
+		String date
+		if(valueCase.toString().toLowerCase() =="cr")
+			date =  changeValueTimeDateOfToday(0, 0, 0, 5, 0, 0, formatDate)
+			else if (valueCase.toString().toLowerCase() =="p")
+				date =  changeValueTimeDateOfToday(0, 0, -1, 5, 0, 0, formatDate)
+				else if (valueCase.toString().toLowerCase() =="f")
+					date = changeValueTimeDateOfToday(0, 0, 1, 5, 0, 0, formatDate)
+					return date
+	}
+	
+	
+	
 }

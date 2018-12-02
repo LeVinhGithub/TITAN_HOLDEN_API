@@ -42,7 +42,7 @@ import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 
-class ProcessService extends Library_Method_VinhLe{
+class GetService extends Library_Method_VinhLe{
 
 	@Keyword
 	String getBookingIdResponse(ResponseObject response){

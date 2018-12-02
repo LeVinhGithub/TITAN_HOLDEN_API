@@ -264,4 +264,14 @@
       <initValue>''</initValue>
       <name>Glb_veh_modelKey</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('Holden/Holden_DATA_DRIVEN')</initValue>
+      <name>Glb_TestDataObject</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Glb_AdvisorType</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

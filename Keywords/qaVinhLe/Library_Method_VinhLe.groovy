@@ -39,6 +39,8 @@ import org.xml.sax.InputSource;//Convert String to XML object
 import java.io.StringReader;//Convert String to XML object
 import javax.xml.parsers.DocumentBuilderFactory;//Convert String to XML object
 import groovy.sql.Sql //SQL Connection
+
+import java.sql.Connection
 import java.sql.Driver //SQL Connection
 import static org.assertj.core.api.Assertions.*//Assert that
 import java.text.DecimalFormat //Round Number
@@ -224,14 +226,13 @@ class Library_Method_VinhLe {
 
 
 	/**
-	 *	GET SQL SIZE
-	 * @response response, must be an instance of ResponseObject
-	 * @StatusCode Code of Status response
-	 * @ExpectedMessage Expected message want to display
-	 * @return a boolean to indicate whether the response status code equals the expected one
+	 *	CREATE SQL CONNECTION
 	 */
 	@Keyword
-	int getSQLSize( String user, String pass, String URL, String queryCmd ) {
+	Connection createSQLConnection() {
+		String user = GlobalVariable.Glb_sqlUser.toString()
+		String pass = GlobalVariable.Glb_sqlPass.toString()
+		String URL = GlobalVariable.Glb_sqlURL.toString()
 		// Create Driver for connection
 		def driver = Class.forName('com.microsoft.sqlserver.jdbc.SQLServerDriver').newInstance() as Driver
 		// Create Object Properties
@@ -240,17 +241,34 @@ class Library_Method_VinhLe {
 		props.setProperty("user", user)
 		props.setProperty("password", pass)
 		//Create connection for HCM-DEV-DB;databaseName=qa_owen_1_23
-		def conn = driver.connect(URL, props)
+		return driver.connect(URL, props)
+	}
+
+	/**
+	 *	GET SQL SIZE
+	 */
+	@Keyword
+	int getSQLSize(String queryCmd ) {
+		// Create Driver for connection
+		def conn = createSQLConnection()
 		def sql = new Sql(conn)
 		//Executive query for database
 		//Read data row by row by expression eachRow
 		int sizeSQL = 0
 		sql.eachRow(queryCmd) {row -> sizeSQL += 1 }
-		sql.close()
-		conn.close()
+		closeSQLConnection(conn, sql)
 		println sizeSQL
 		return sizeSQL
 
+	}
+
+	/**
+	 *	CLOSE SQL CONNECTION
+	 */
+	@Keyword
+	void closeSQLConnection( Connection connection, Sql sql) {
+		sql.close()
+		connection.close()
 	}
 
 	/**
@@ -285,14 +303,13 @@ class Library_Method_VinhLe {
 
 	/**
 	 * CONVERT STRING TO DATE TYPE
-	 * 
 	 */
 	@Keyword
 	Date convertStringtoDate(String stringDate, String formatDate) {
 		SimpleDateFormat formatter = new SimpleDateFormat(formatDate);
 		Date date
 		try {
-
+			
 			date = formatter.parse(stringDate);
 			System.out.println(date);
 			System.out.println(formatter.format(date));
@@ -300,6 +317,31 @@ class Library_Method_VinhLe {
 			e.printStackTrace();
 		}
 		return date
+	}
+	
+	/**
+	 * GET VALUE FROM TEST DATA WITH COLUMN NAME AND ROW INDEX
+	 */
+	@Keyword
+	String getValueFromTestDataWithColumnNameAndRowIndex(String columnName, int rowIndex) {
+		TestData data = GlobalVariable.Glb_TestDataObject as TestData
+				String expectedVaue = data.getValue(columnName, rowIndex)
+				println expectedVaue
+	}
+	
+	/**
+	 * CHANGE VALUE TIME DATE
+	 */
+	@Keyword
+	String changeValueTimeDateOfToday(int numberYear,int numberMonth,int numberDay,int numberHour,int numberMinute,int numberSecond, String formatDate) {
+		Date today = new Date()
+		String expectedDate
+		use(groovy.time.TimeCategory) {
+			def Expected_Date = today + numberYear.year + numberMonth.month + numberDay.day  + numberHour.hour + numberMinute.minute + numberSecond.second
+			expectedDate = Expected_Date.format(formatDate)
+			println expectedDate
+		 }
+		return expectedDate
 	}
 
 

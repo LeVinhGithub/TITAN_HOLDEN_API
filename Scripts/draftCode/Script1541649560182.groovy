@@ -12,6 +12,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testcase.TestCaseFactory as TestCaseFactory
 import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testdata.TestDataColumn
 import com.kms.katalon.core.testdata.TestDataFactory as TestDataFactory
 import com.kms.katalon.core.testobject.ConditionType as ConditionType
 import com.kms.katalon.core.testobject.ObjectRepository as ObjectRepository
@@ -36,9 +37,6 @@ import java.sql.Driver as Driver
  * @author ANH THY
  * 1. add sql for customer information
  */
-WS.comment(null)
-
-def today = new Date()
-//Set current Date
-def current_date = today.format("YYYY-MM-dd'T'HH:50:00")
-println current_date
+GlobalVariable.Glb_AdvisorType = 'exist'
+CustomKeywords.'holdenObject.SetupAndSetVariable.setValueForAdvisorWithAdvisorTypeInput'()
+println GlobalVariable.Glb_Adv_Id
