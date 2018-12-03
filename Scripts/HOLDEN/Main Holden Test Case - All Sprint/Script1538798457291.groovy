@@ -68,49 +68,11 @@ GlobalVariable.Glb_Status_SearchService = 'failed'
 GlobalVariable.Glb_Status_SubscriptionAdd = 'failed'
 GlobalVariable.Glb_Status_SubscriptionDetact = 'failed'
 GlobalVariable.Glb_BookingStatus = 'not yet'
-GlobalVariable.Glb_DocumentId = ''
 
 //STEP
 //0. Setup Global Variable and other value
 WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_00_Setup_Method_And_Variables'), [
-	('Setup_Dealer_Code') : var_DealerCode ,
-	
-	('Setup_StartServiceDate') : var_StartServiceDate,
-	('Setup_EndServiceDate') : var_EndServiceDate,
-	
-	('Setup_CustomerType') : var_CustomerType,
-	('Setup_FirstName') : var_FirstName,
-	('Setup_LastName') : var_LastName,
-	('Setup_TradingEntityId') : var_TradingEntityID,
-	('Setup_LineOne') : var_LineOne,
-	('Setup_CityName') : var_CityName,
-	('Setup_CountryID') : var_CountryID,
-	('Setup_Postcode') : var_Postcode,
-	('Setup_State') : var_State,
-	('Setup_ChannelCode') : var_ChannelCode,
-	('Setup_PhoneNumber') : var_PhoneNumber,
-	('Setup_Email') : var_Email,
-	
-	('Setup_VehicleType') : var_VehicleType,
-	('Setup_Model') : var_Model,
-	('Setup_ModelYear') : var_ModelYear,
-	('Setup_MakeString') : var_MakeString,
-	('Setup_ManufacturerName') : var_ManufacturerName,
-	('Setup_VehicleID') : var_VehicleID,
-	
-	('Setup_AdvisorType') : var_AdvisorType,
-	
-	('Setup_OperationCode') : var_OperationCode,
-	('Setup_OperationDescription') : var_OperationDescription,
-	
-	('Setup_StartSearchDate') : var_StartSearchDate,
-	('Setup_EndSearchDate') : var_EndSearchDate,
-	
-	//('Setup_AdvisorType') : var_ChangeDate,
-	('Setup_ChangeDate') : var_ChangeDate,
-	('Setup_ChangeCustomerVehicle') : var_ChangeCustomerVehicle,
-	('Setup_ChangeOpCodeContent') : var_ChangeOpCodeContent,
-	('Setup_BookingId') : var_BookingId],
+	('Setup_LineNumber') : var_LineNumber],
 	FailureHandling.STOP_ON_FAILURE)
 
 //1. Get Integration

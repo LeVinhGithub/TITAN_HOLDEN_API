@@ -4,6 +4,10 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
+import java.sql.Connection
+import groovy.sql.Sql //SQL Connection
+import java.sql.Driver //SQL Connection
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.checkpoint.CheckpointFactory
@@ -81,18 +85,38 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void setValueForAdvisorWithAdvisorTypeInput(){
-		if(!(GlobalVariable.Glb_AdvisorType.toString().toLowerCase() == 'exist')) {
-			GlobalVariable.Glb_Adv_Id = 'invalid'
-			GlobalVariable.Glb_Adv_FirstName= 'invalid'
-			GlobalVariable.Glb_Adv_LastName= 'invalid'
-		} else {
-			GlobalVariable.Glb_Adv_Id = 'agrim'
-			GlobalVariable.Glb_Adv_FirstName= 'Andrew'
-			GlobalVariable.Glb_Adv_LastName= 'Grima'
-		}
+	void setValueForNotExistAdvisor(){
+		GlobalVariable.Glb_Adv_Id = 'invalid'
+		GlobalVariable.Glb_Adv_FirstName= 'invalid'
+		GlobalVariable.Glb_Adv_LastName= 'invalid'
 	}
 
+	@Keyword
+	void setValueForExistAdvisor(){
+		int countNumber = 0
+		String cmdQuery = "exec Get_All_Service_Advisors @TerminationDate= '10/12/2018', @FinancialYearKey= 20"
+		Connection conn = createSQLConnection()
+		def sql = new Sql(conn)
+		sql.eachRow(cmdQuery) {row ->
+			if(countNumber == 1){
+				GlobalVariable.Glb_Adv_Id = row[0] as String
+				GlobalVariable.Glb_Adv_FirstName= row.First_Name as String
+				GlobalVariable.Glb_Adv_LastName= row.Family_Name as String
+				println GlobalVariable.Glb_Adv_Id + GlobalVariable.Glb_Adv_FirstName  + GlobalVariable.Glb_Adv_LastName
+			}
+		countNumber += 1
+		}
+		closeSQLConnection(conn, sql)
+		
+	}
+	
+	@Keyword
+	void setValueForAdvisorWithTypeInput(){
+		if(GlobalVariable.Glb_AdvisorType.toString().toLowerCase()=='exist')
+			setValueForExistAdvisor()
+			else setValueForNotExistAdvisor()
+	}
+	
 	@Keyword
 	void setValueNewCustomerForGlobalVariable(){
 		GlobalVariable.Glb_FirstName = common.setValueRandomWithTimeValue("fname")
@@ -108,6 +132,15 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_veh_VehicleId = common.setValueRandomWithTimeValue("vin")
 		println GlobalVariable.Glb_veh_VehicleId
 	}
+	
+	@Keyword
+	void setValueForCustomerAndVehicleWithTypeInput(){
+		if(GlobalVariable.Glb_CustomerType.toString().toLowerCase()=='new')
+			setValueNewCustomerForGlobalVariable()
+		if(GlobalVariable.Glb_VehicleType.toString().toLowerCase()=='new')
+			setValueNewVehicleForGlobalVariable()
+	}
+	
 
 	@Keyword
 	String createValueNewCustomerForLocalVariable(String value){
@@ -126,9 +159,9 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 	@Keyword
 	void setDateValueForAppointmentDate(){
 		GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceDate, "YYYY-MM-dd'T'HH:50:00")
-				GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceEndDate, "YYYY-MM-dd'T'HH:55:00")
+		GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceEndDate, "YYYY-MM-dd'T'HH:55:00")
 	}
-	
+
 	@Keyword
 	void setDateValueForAppointmentDateWithInvalidHour(){
 		GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceDate, "YYYY-MM-dd'T'HH:50:00")
@@ -138,13 +171,83 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 	@Keyword
 	void setDateValueForSearchServiceDate(){
 		GlobalVariable.Glb_StartSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_StartSearchDate, "YYYY-MM-dd'T00:00:00'")
-				GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T23:59:00'")
+		GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T23:59:00'")
 	}
-	
+
 	@Keyword
 	void setDateValueForSearchServiceDateWithInvalidHour(){
 		GlobalVariable.Glb_StartSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_StartSearchDate, "YYYY-MM-dd'T23:00:00'")
 		GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T00:00:00'")
 	}
+	
+	@Keyword
+	void setValueDateForAllDateGlobalVariable(){
+		if(GlobalVariable.Glb_ServiceDate.toString().toLowerCase()=='crh')
+			setDateValueForAppointmentDateWithInvalidHour()
+			else setDateValueForAppointmentDate()
+			
+		if(GlobalVariable.Glb_StartSearchDate.toString().toLowerCase()=='crh')
+			setDateValueForSearchServiceDateWithInvalidHour()
+			else setDateValueForSearchServiceDate()
+	}
+	
+	@Keyword
+	void setFinancialYear(){
+		String cmdQuery = "select top 1 from ENTERPRISE"
+				Connection conn = createSQLConnection()
+				def sql = new Sql(conn)
+				sql.eachRow(cmdQuery) {row ->
+				GlobalVariable.Glb_FinancialYear = row.CURRENT_FINANCIAL_YEAR_KEY as String
+				println GlobalVariable.Glb_FinancialYear
+		}
+		closeSQLConnection(conn, sql)
+	}
+	
+	@Keyword
+	void setThirdPartyAppointmentConfirmationKey(){
+		String cmdQuery = "select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING"
+				String valueKey = ""
+				Connection conn = createSQLConnection()
+				def sql = new Sql(conn)
+				sql.eachRow("select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING") {row ->
+				String valueKeyTemp = row.THIRD_PARTY_APPOINTMENT_CONFIRMATION_KEY as String
+				if(valueKeyTemp == "xxx")
+					GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
+					else valueKey = valueKeyTemp
+		}
+		println GlobalVariable.Glb_DocumentId
+		closeSQLConnection(conn, sql)
+	}
+	
+	@Keyword
+	String getMakeCodeFromMakeTableSQL(Connection connection){
+		String makeIdQuery = "select * from MAKE where MAKE_ID = '"+GlobalVariable.Glb_veh_MakeString+"'"
+		String makeID
+		def sql = new Sql(connection)
+		sql.eachRow(makeIdQuery) {row ->
+			makeID = row.MAKE_KEY as String
+			println makeID
+		}
+		return makeID
+	}
+	
+	@Keyword
+	void setModelKeyFromMakeID(){
+		Connection conn = createSQLConnection()
+		String makeID = getMakeCodeFromMakeTableSQL(conn)
+		String modelKeyQuery = "SELECT TOP 1 M.MODEL_KEY FROM MODEL M "+
+				"INNER JOIN MODEL_TYPE MT "+
+				"ON M.MODEL_TYPE_KEY = MT.MODEL_TYPE_KEY "+
+				"WHERE MT.MAKE_KEY = "+ makeID +" AND "+
+				"M.SERIES = '"+GlobalVariable.Glb_veh_Model+"' "+
+				"ORDER BY M.MODEL_KEY DESC"
+		def sql = new Sql(conn)
+		sql.eachRow(modelKeyQuery) {row ->
+			GlobalVariable.Glb_veh_modelKey = row[0] as String
+			println GlobalVariable.Glb_veh_modelKey
+		}
+		closeSQLConnection(conn, sql)
+	}
+	
 	
 }

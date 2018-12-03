@@ -224,7 +224,6 @@ class Library_Method_VinhLe {
 
 	}
 
-
 	/**
 	 *	CREATE SQL CONNECTION
 	 */
