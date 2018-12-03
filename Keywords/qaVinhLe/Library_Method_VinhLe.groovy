@@ -309,7 +309,7 @@ class Library_Method_VinhLe {
 		SimpleDateFormat formatter = new SimpleDateFormat(formatDate);
 		Date date
 		try {
-			
+
 			date = formatter.parse(stringDate);
 			System.out.println(date);
 			System.out.println(formatter.format(date));
@@ -318,17 +318,17 @@ class Library_Method_VinhLe {
 		}
 		return date
 	}
-	
+
 	/**
 	 * GET VALUE FROM TEST DATA WITH COLUMN NAME AND ROW INDEX
 	 */
 	@Keyword
 	String getValueFromTestDataWithColumnNameAndRowIndex(String columnName, int rowIndex) {
 		TestData data = GlobalVariable.Glb_TestDataObject as TestData
-				String expectedVaue = data.getValue(columnName, rowIndex)
-				println expectedVaue
+		String expectedVaue = data.getValue(columnName, rowIndex)
+		println expectedVaue
 	}
-	
+
 	/**
 	 * CHANGE VALUE TIME DATE
 	 */
@@ -340,7 +340,7 @@ class Library_Method_VinhLe {
 			def Expected_Date = today + numberYear.year + numberMonth.month + numberDay.day  + numberHour.hour + numberMinute.minute + numberSecond.second
 			expectedDate = Expected_Date.format(formatDate)
 			println expectedDate
-		 }
+		}
 		return expectedDate
 	}
 

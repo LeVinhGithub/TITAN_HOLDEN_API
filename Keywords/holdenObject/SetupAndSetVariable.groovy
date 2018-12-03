@@ -44,7 +44,7 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 class SetupAndSetVariable extends Library_Method_VinhLe{
 	Common common = new Common()
-	
+
 	@Keyword
 	void setValueToGlobalVariable(int rowIndex){
 		GlobalVariable.Glb_Dealer_Code = getValueFromTestDataWithColumnNameAndRowIndex("var_DealerCode", rowIndex)
@@ -79,7 +79,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_StartSearchDate = getValueFromTestDataWithColumnNameAndRowIndex("var_StartSearchDate", rowIndex)
 		GlobalVariable.Glb_EndSearchDate = getValueFromTestDataWithColumnNameAndRowIndex("var_EndSearchDate", rowIndex)
 	}
-	
+
 	@Keyword
 	void setValueForAdvisorWithAdvisorTypeInput(){
 		if(!(GlobalVariable.Glb_AdvisorType.toString().toLowerCase() == 'exist')) {
@@ -92,7 +92,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 			GlobalVariable.Glb_Adv_LastName= 'Grima'
 		}
 	}
-	
+
 	@Keyword
 	void setValueNewCustomerForGlobalVariable(){
 		GlobalVariable.Glb_FirstName = common.setValueRandomWithTimeValue("fname")
@@ -100,7 +100,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_LastName = common.setValueRandomWithTimeValue("lname")
 		println GlobalVariable.Glb_LastName
 	}
-	
+
 	@Keyword
 	void setValueNewVehicleForGlobalVariable(){
 		GlobalVariable.Glb_veh_ManufacturerName = common.setValueRandomWithTimeValue("rego")
@@ -108,32 +108,43 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_veh_VehicleId = common.setValueRandomWithTimeValue("vin")
 		println GlobalVariable.Glb_veh_VehicleId
 	}
-	
+
 	@Keyword
 	String createValueNewCustomerForLocalVariable(String value){
 		String createdValue = common.setValueRandomWithTimeValue(value)
 		println createdValue
 		return createdValue
 	}
-	
+
 	@Keyword
 	String createValueNewVehicleForLocalVariable(String value){
 		String createdValue = common.setValueRandomWithTimeValue(value)
 		println createdValue
 		return createdValue
 	}
-	
+
 	@Keyword
 	void setDateValueForAppointmentDate(){
 		GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceDate, "YYYY-MM-dd'T'HH:50:00")
-		GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceEndDate, "YYYY-MM-dd'T'HH:50:00")
+				GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceEndDate, "YYYY-MM-dd'T'HH:55:00")
 	}
 	
 	@Keyword
+	void setDateValueForAppointmentDateWithInvalidHour(){
+		GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceDate, "YYYY-MM-dd'T'HH:50:00")
+		GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ServiceEndDate, "YYYY-MM-dd'T'HH:00:00")
+	}
+
+	@Keyword
 	void setDateValueForSearchServiceDate(){
-		GlobalVariable.Glb_StartSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_StartSearchDate, "YYYY-MM-dd'T'HH:50:00")
-		GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T'HH:50:00")
+		GlobalVariable.Glb_StartSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_StartSearchDate, "YYYY-MM-dd'T00:00:00'")
+				GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T23:59:00'")
 	}
 	
+	@Keyword
+	void setDateValueForSearchServiceDateWithInvalidHour(){
+		GlobalVariable.Glb_StartSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_StartSearchDate, "YYYY-MM-dd'T23:00:00'")
+		GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T00:00:00'")
+	}
 	
 }

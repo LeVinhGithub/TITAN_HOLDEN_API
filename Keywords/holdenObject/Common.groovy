@@ -162,7 +162,7 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
 		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
 	}
-	
+
 	@Keyword
 	String setValueRandomWithTimeValue(String globalVariable){
 		if(globalVariable.toLowerCase()=='fname')
@@ -174,19 +174,18 @@ class Common extends Library_Method_VinhLe{
 		if(globalVariable.toLowerCase()=='vin')
 			return 'VNVNV'+ getDateFormat('yyMMddHHmmss')
 	}
-	
+
 	@Keyword
 	String setValueDateForEachCasesWithAUTimeZone(Object valueCase, String formatDate){
 		String date
 		if(valueCase.toString().toLowerCase() =="cr")
 			date =  changeValueTimeDateOfToday(0, 0, 0, 5, 0, 0, formatDate)
-			else if (valueCase.toString().toLowerCase() =="p")
-				date =  changeValueTimeDateOfToday(0, 0, -1, 5, 0, 0, formatDate)
-				else if (valueCase.toString().toLowerCase() =="f")
-					date = changeValueTimeDateOfToday(0, 0, 1, 5, 0, 0, formatDate)
-					return date
+		else if (valueCase.toString().toLowerCase() =="crh")
+			date =  changeValueTimeDateOfToday(0, 0, 0, 5, 0, 0, formatDate)
+		else if (valueCase.toString().toLowerCase() =="p")
+			date =  changeValueTimeDateOfToday(0, 0, -1, 5, 0, 0, formatDate)
+		else if (valueCase.toString().toLowerCase() =="f")
+			date = changeValueTimeDateOfToday(0, 0, 1, 5, 0, 0, formatDate)
+		return date
 	}
-	
-	
-	
 }
