@@ -45,8 +45,20 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 class GetCustomerInformation extends Library_Method_VinhLe{
 
 	@Keyword
-	String getBookingIdResponse(ResponseObject response){
-		String BookingId = getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
-		return BookingId
+	ResponseObject getResponseTestCaseSearchCustomerInformation(){
+		RequestObject SearchCustomerInformation = findTestObject('Holden/Holden_02_SearchCustomerInformation', [
+		                                                                                                        ('obj_DealerId') : GlobalVariable.Glb_Dealer_Code, 
+		                                                                                                        ('obj_GivenName') : GlobalVariable.Glb_FirstName, 
+		                                                                                                        ('obj_FamilyName') : GlobalVariable.Glb_LastName])
+				return WS.sendRequest(SearchCustomerInformation)
 	}
+	
+	@Keyword
+	void verifySearchNotExistCustomerResponse(ResponseObject response){
+		if(GlobalVariable.Glb_CustomerType.toString().toLowerCase() == 'new')
+			verifyValueSOAPNode(response, "CustomerParty", "DealerManagementSystemID", null, 0, 0)
+	}
+	
+	
+	
 }

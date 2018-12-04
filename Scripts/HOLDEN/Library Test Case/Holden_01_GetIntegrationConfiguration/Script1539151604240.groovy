@@ -28,6 +28,10 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WSBuiltInKey
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUiBuiltInKeywords
 import com.sun.jna.platform.win32.WinNT.ACCESS_ACEStructure
+
+import holdenObject.Common
+import holdenObject.GetIntegration
+
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -36,70 +40,19 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
  * V0. Create framework 09/10/18
  * V1. Verify response 13/10/18
  * Declare request  14/10/18
+ * Transfer to new framework 04/12/18
  */
 
-//CODE 
-//## DECLARE VIABLE
-
-//## PROCESS API
-//Print all value before request
-println GlobalVariable.Glb_Dealer_Code
-//Declare request
-	RequestObject IntegrationConfig = findTestObject('Holden/Holden_01_GetIntegrationConfiguration', [
-		('obj_DealerId') : GlobalVariable.Glb_Dealer_Code])
-//Declare response
-	ResponseObject res_IntegrationConfig = WS.sendRequest(IntegrationConfig)
-	
-//## RESPONSE ACCESS
-//All negative case
-
-	/**
-	 * Use If/ If else Statement
-	 */
-	//Dealer Code invalid
-	if(!(GlobalVariable.Glb_Dealer_Code == '299560')){
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyResponseCode_Msg'(res_IntegrationConfig, 200, "Dealer "+ GlobalVariable.Glb_Dealer_Code +" Not Authorized")
-		println "Dealer Code invalid"
-		}
-//## VALID RESPONSE VERIFICATION
-//Validate Response Status Code
-	else{
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyResponseCode_Msg'(res_IntegrationConfig, 200, "")
-	
-//Validate "Sender"
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Sender", "CreatorNameCode", "GM", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Sender", "SenderNameCode", "OSS", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Sender", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Sender", "DealerCountryCode", "US", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Sender", "LanguageCode", "en-US", 0, 0)
-	
-//Validate "Destination"
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Destination", "DestinationNameCode", "QI", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Destination", "DestinationSoftwareCode", "QI", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Destination", "DestinationSoftware", "QI", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "Destination", "DealerTargetCountry", "US", 0, 0)
-	
-//Validate Action Code
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyAttributeSOAPNode'(res_IntegrationConfig, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
-	
-//Validate Integration Config
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "SyncMode", "ASYNCHRONOUS", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "AppointmentsUpdatable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "AppointmentCustomerUpdatable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "AppointmentVehicleUpdatable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "AppointmentsRetrievable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "AppointmentsSearchable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "RepairOrderCreatable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "RepairOrderUpdatable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "RepairOrderRetrievable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "CustomerSearchable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "VehicleSearchable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "CustomerInformationSearchable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "AdvisorsRetrievable", "true", 0, 0)
-	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_IntegrationConfig, "IntegrationConfigurationDetail", "LaborOperationCodesRetrievable", "true", 0, 0)
-	
-	//Set Status Method
-	GlobalVariable.Glb_Status_Integration = 'passed'
-	}
-	
+//BEFORE 
+     ResponseObject res_IntegrationConfig
+	 Common common =new Common()
+	 GetIntegration getInt = new GetIntegration()
+//TEST CASE
+	 res_IntegrationConfig = getInt.getResponseTestCaseIntegrationConfig()
+	 if(common.validateInvalidDealerCode(res_IntegrationConfig)){}
+	 	else{
+			 common.verifyStatusCodeIs200OK(res_IntegrationConfig)
+			 common.verifyApplicationAreaResponse(res_IntegrationConfig)
+			 getInt.verifyIntegrationConfig(res_IntegrationConfig)
+			 common.setStatusPassedForTestCaseWithTypeInput("int")
+		 }

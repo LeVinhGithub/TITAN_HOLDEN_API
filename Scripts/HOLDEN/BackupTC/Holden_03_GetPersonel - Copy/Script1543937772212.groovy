@@ -44,8 +44,7 @@ import java.sql.Driver
 
 //## PROCESS API
 //Declare request
-	RequestObject GetPersonel = findTestObject('Holden/Holden_03_GetPersonel', [
-		('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code])
+	RequestObject GetPersonel = findTestObject('Holden/Holden_03_GetPersonel', [('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code])
 //Declare response
 	ResponseObject res_GetPersonel = WS.sendRequest(GetPersonel)
 	

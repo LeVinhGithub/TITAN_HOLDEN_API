@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Holden_05B_ChangeServiceVisit - Copy</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>874405db-366f-4789-ab33-a0444dd6af11</testCaseGuid>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>86793dce-e432-4394-8b01-a08ad9e90ced</id>
+      <masked>false</masked>
+      <name>var_ChangeLaborCode</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>67cdf5f8-d8e2-40b9-a21f-782c5ebcc029</id>
+      <masked>false</masked>
+      <name>var_ChangeLaborDescription</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>bf376a0e-e413-4667-8262-aeaddd26ceb9</id>
+      <masked>false</masked>
+      <name>var_ChangeDate</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>be809304-f524-488f-8bc7-cb1cd3cd9fa9</id>
+      <masked>false</masked>
+      <name>var_ChangeNote</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>8904ab4c-302a-43e4-a19e-99b79735d14f</id>
+      <masked>false</masked>
+      <name>var_ChangeTransport</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>ada1a1e7-73a6-4427-b8ef-36d5d1c7a7a6</id>
+      <masked>false</masked>
+      <name>var_ChangeJobNumber</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>44bf8dcc-c1b7-444e-98cb-6783970d31fc</id>
+      <masked>false</masked>
+      <name>var_ChangeJobType</name>
+   </variable>
+</TestCaseEntity>

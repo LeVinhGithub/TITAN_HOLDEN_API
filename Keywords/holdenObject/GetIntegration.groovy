@@ -45,8 +45,27 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 class GetIntegration extends Library_Method_VinhLe{
 
 	@Keyword
-	String getBookingIdResponse(ResponseObject response){
-		String BookingId = getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
-		return BookingId
+	ResponseObject getResponseTestCaseIntegrationConfig(){
+		RequestObject IntegrationConfig = findTestObject('Holden/Holden_01_GetIntegrationConfiguration', [
+			('obj_DealerId') : GlobalVariable.Glb_Dealer_Code])
+		return WS.sendRequest(IntegrationConfig)
+	}
+
+	@Keyword
+	void verifyIntegrationConfig(ResponseObject response){
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "SyncMode", "ASYNCHRONOUS", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentsUpdatable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentCustomerUpdatable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentVehicleUpdatable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentsRetrievable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentsSearchable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "RepairOrderCreatable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "RepairOrderUpdatable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "RepairOrderRetrievable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "CustomerSearchable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "VehicleSearchable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "CustomerInformationSearchable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AdvisorsRetrievable", "true", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "LaborOperationCodesRetrievable", "true", 0, 0)
 	}
 }

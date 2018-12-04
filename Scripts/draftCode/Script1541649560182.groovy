@@ -31,6 +31,8 @@ import java.text.ParseException as ParseException
 import java.text.SimpleDateFormat as SimpleDateFormat
 import java.util.Date as Date
 import groovy.sql.Sql as Sql
+import holdenObject.Common
+
 import java.sql.Driver as Driver
 
 /**
@@ -38,5 +40,8 @@ import java.sql.Driver as Driver
  * 1. add sql for customer information
  */
 GlobalVariable.Glb_AdvisorType = 'exist'
-CustomKeywords.'holdenObject.SetupAndSetVariable.setValueForAdvisorWithAdvisorTypeInput'()
-println GlobalVariable.Glb_Adv_Id
+//CustomKeywords.'holdenObject.SetupAndSetVariable.setValueForAdvisorWithAdvisorTypeInput'()
+Common common = new Common()
+int x = 12
+if(common.demo(x)){}
+	else println 'else statement'
