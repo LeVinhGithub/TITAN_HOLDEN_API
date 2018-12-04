@@ -326,6 +326,7 @@ class Library_Method_VinhLe {
 		TestData data = GlobalVariable.Glb_TestDataObject as TestData
 		String expectedVaue = data.getValue(columnName, rowIndex)
 		println expectedVaue
+		return expectedVaue
 	}
 
 	/**

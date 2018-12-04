@@ -104,19 +104,19 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 				GlobalVariable.Glb_Adv_LastName= row.Family_Name as String
 				println GlobalVariable.Glb_Adv_Id + GlobalVariable.Glb_Adv_FirstName  + GlobalVariable.Glb_Adv_LastName
 			}
-		countNumber += 1
+			countNumber += 1
 		}
 		closeSQLConnection(conn, sql)
-		
+
 	}
-	
+
 	@Keyword
 	void setValueForAdvisorWithTypeInput(){
 		if(GlobalVariable.Glb_AdvisorType.toString().toLowerCase()=='exist')
 			setValueForExistAdvisor()
-			else setValueForNotExistAdvisor()
+		else setValueForNotExistAdvisor()
 	}
-	
+
 	@Keyword
 	void setValueNewCustomerForGlobalVariable(){
 		GlobalVariable.Glb_FirstName = common.setValueRandomWithTimeValue("fname")
@@ -132,7 +132,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_veh_VehicleId = common.setValueRandomWithTimeValue("vin")
 		println GlobalVariable.Glb_veh_VehicleId
 	}
-	
+
 	@Keyword
 	void setValueForCustomerAndVehicleWithTypeInput(){
 		if(GlobalVariable.Glb_CustomerType.toString().toLowerCase()=='new')
@@ -140,7 +140,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		if(GlobalVariable.Glb_VehicleType.toString().toLowerCase()=='new')
 			setValueNewVehicleForGlobalVariable()
 	}
-	
+
 
 	@Keyword
 	String createValueNewCustomerForLocalVariable(String value){
@@ -179,46 +179,46 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_StartSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_StartSearchDate, "YYYY-MM-dd'T23:00:00'")
 		GlobalVariable.Glb_EndSearchDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_EndSearchDate, "YYYY-MM-dd'T00:00:00'")
 	}
-	
+
 	@Keyword
 	void setValueDateForAllDateGlobalVariable(){
 		if(GlobalVariable.Glb_ServiceDate.toString().toLowerCase()=='crh')
 			setDateValueForAppointmentDateWithInvalidHour()
-			else setDateValueForAppointmentDate()
-			
+		else setDateValueForAppointmentDate()
+
 		if(GlobalVariable.Glb_StartSearchDate.toString().toLowerCase()=='crh')
 			setDateValueForSearchServiceDateWithInvalidHour()
-			else setDateValueForSearchServiceDate()
+		else setDateValueForSearchServiceDate()
 	}
-	
+
 	@Keyword
 	void setFinancialYear(){
-		String cmdQuery = "select top 1 from ENTERPRISE"
-				Connection conn = createSQLConnection()
-				def sql = new Sql(conn)
-				sql.eachRow(cmdQuery) {row ->
-				GlobalVariable.Glb_FinancialYear = row.CURRENT_FINANCIAL_YEAR_KEY as String
-				println GlobalVariable.Glb_FinancialYear
+		String cmdQuery = "select top 1 * from ENTERPRISE"
+		Connection conn = createSQLConnection()
+		def sql = new Sql(conn)
+		sql.eachRow(cmdQuery) {row ->
+			GlobalVariable.Glb_FinancialYear = row.CURRENT_FINANCIAL_YEAR_KEY as String
+			println GlobalVariable.Glb_FinancialYear
 		}
 		closeSQLConnection(conn, sql)
 	}
-	
+
 	@Keyword
 	void setThirdPartyAppointmentConfirmationKey(){
 		String cmdQuery = "select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING"
-				String valueKey = ""
-				Connection conn = createSQLConnection()
-				def sql = new Sql(conn)
-				sql.eachRow("select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING") {row ->
-				String valueKeyTemp = row.THIRD_PARTY_APPOINTMENT_CONFIRMATION_KEY as String
-				if(valueKeyTemp == "xxx")
-					GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
-					else valueKey = valueKeyTemp
+		String valueKey = ""
+		Connection conn = createSQLConnection()
+		def sql = new Sql(conn)
+		sql.eachRow("select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING") {row ->
+			String valueKeyTemp = row.THIRD_PARTY_APPOINTMENT_CONFIRMATION_KEY as String
+			if(valueKeyTemp == "xxx")
+				GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
+			else valueKey = valueKeyTemp
 		}
 		println GlobalVariable.Glb_DocumentId
 		closeSQLConnection(conn, sql)
 	}
-	
+
 	@Keyword
 	String getMakeCodeFromMakeTableSQL(Connection connection){
 		String makeIdQuery = "select * from MAKE where MAKE_ID = '"+GlobalVariable.Glb_veh_MakeString+"'"
@@ -230,7 +230,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		}
 		return makeID
 	}
-	
+
 	@Keyword
 	void setModelKeyFromMakeID(){
 		Connection conn = createSQLConnection()
@@ -248,6 +248,6 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		}
 		closeSQLConnection(conn, sql)
 	}
-	
-	
+
+
 }
