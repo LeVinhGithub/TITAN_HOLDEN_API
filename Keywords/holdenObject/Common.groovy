@@ -1,46 +1,10 @@
 package holdenObject
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.checkpoint.Checkpoint
-import com.kms.katalon.core.checkpoint.CheckpointFactory
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords
-import com.kms.katalon.core.model.FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testcase.TestCaseFactory
-import com.kms.katalon.core.testdata.TestData
-import com.kms.katalon.core.testdata.TestDataFactory
-import com.kms.katalon.core.testobject.ObjectRepository
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
+import com.kms.katalon.core.testobject.ResponseObject
 
+import groovy.sql.Sql
 import internal.GlobalVariable
 import qaVinhLe.Library_Method_VinhLe
-import MobileBuiltInKeywords as Mobile
-import WSBuiltInKeywords as WS
-import WebUiBuiltInKeywords as WebUI
-
-import org.openqa.selenium.WebElement
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.By
-import groovy.sql.Sql
-
-import com.kms.katalon.core.mobile.keyword.internal.MobileDriverFactory
-import com.kms.katalon.core.webui.driver.DriverFactory
-
-import com.kms.katalon.core.testobject.RequestObject
-import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.testobject.ConditionType
-import com.kms.katalon.core.testobject.TestObjectProperty
-
-import com.kms.katalon.core.mobile.helper.MobileElementCommonHelper
-import com.kms.katalon.core.util.KeywordUtil
-
-import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 
 class Common extends Library_Method_VinhLe{
@@ -106,15 +70,15 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void verifyNewCustomerInformationResponse(ResponseObject response){
 		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
-				verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
-				verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
-				verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
-				verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
-				verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
-				verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
-				verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response){
 		verifyOldCustomerInformationResponse(response)
@@ -165,20 +129,27 @@ class Common extends Library_Method_VinhLe{
 	void setBookingIdFromResponseToGlobalVariable(ResponseObject response){
 		GlobalVariable.Glb_Booking_ID =  getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
 	}
-	
+
 	@Keyword
-	void verifyWholeAppointmentInformation(ResponseObject response){
+	void verifyWholeAppointmentInformationWithOneJobline(ResponseObject response){
 		setBookingIdFromResponseToGlobalVariable(response)
 		verifyBookingIdResponse(response)
 		verifyTimeAppointmentInformationResponse(response)
 		verifyGeneralAppointmentJoblineAInformationResponse(response)
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
-			
-		if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='true')
-			verifyGeneralAppointmentJoblineBInformationResponse(response)
-		
+			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
+			else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
 	}
 	
+	@Keyword
+	void verifyWholeAppointmentInformationWithTwoJobline(ResponseObject response){
+		verifyWholeAppointmentInformationWithOneJobline(response)
+		verifyGeneralAppointmentJoblineBInformationResponse(response)
+		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
+			verifyJoblineWithOpCodeNotExistInformationResponse(response,1 )
+			else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
+	}
+
 	@Keyword
 	void verifyBookingIdResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_Booking_ID, 1, 0)
@@ -198,24 +169,30 @@ class Common extends Library_Method_VinhLe{
 
 	@Keyword
 	void verifyGeneralAppointmentJoblineBInformationResponse(ResponseObject response){
-		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "B", 0, 0)
-		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 0, 0)
+		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "B", 1, 0)
+		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 1, 0)
 	}
 
 	@Keyword
-	void verifyJoblineWithOpCodeExistInformationResponse(ResponseObject response){
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
-		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
+	void verifyJoblineWithOpCodeExistInformationResponse(ResponseObject response, int noJobline){
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", GlobalVariable.Glb_Ser_LaborCode, noJobline, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", GlobalVariable.Glb_Ser_LaborCode, noJobline, 0)
+		if(!(GlobalVariable.Glb_Ser_LaborDescription.toString().toLowerCase().contains('invalid'))){
+			verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
+			verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
+		}
+		else{
+			verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
+			verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
+		}
 	}
 
 	@Keyword
-	void verifyJoblineWithOpCodeNotExistInformationResponse(ResponseObject response){
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", GlobalVariable.Glb_Ser_LaborCode, 0, 0)
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
-		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborCode+' - '+GlobalVariable.Glb_Ser_LaborDescription, 0, 0)
+	void verifyJoblineWithOpCodeNotExistInformationResponse(ResponseObject response, int noJobline){
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", '', noJobline, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", '', noJobline, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
+		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
 	}
 
 	@Keyword
