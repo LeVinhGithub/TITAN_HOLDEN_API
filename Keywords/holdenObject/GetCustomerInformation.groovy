@@ -47,18 +47,15 @@ class GetCustomerInformation extends Library_Method_VinhLe{
 	@Keyword
 	ResponseObject getResponseTestCaseSearchCustomerInformation(){
 		RequestObject SearchCustomerInformation = findTestObject('Holden/Holden_02_SearchCustomerInformation', [
-		                                                                                                        ('obj_DealerId') : GlobalVariable.Glb_Dealer_Code, 
-		                                                                                                        ('obj_GivenName') : GlobalVariable.Glb_FirstName, 
-		                                                                                                        ('obj_FamilyName') : GlobalVariable.Glb_LastName])
-				return WS.sendRequest(SearchCustomerInformation)
+			('obj_DealerId') : GlobalVariable.Glb_Dealer_Code,
+			('obj_GivenName') : GlobalVariable.Glb_FirstName,
+			('obj_FamilyName') : GlobalVariable.Glb_LastName])
+		return WS.sendRequest(SearchCustomerInformation)
 	}
-	
+
 	@Keyword
 	void verifySearchNotExistCustomerResponse(ResponseObject response){
 		if(GlobalVariable.Glb_CustomerType.toString().toLowerCase() == 'new')
 			verifyValueSOAPNode(response, "CustomerParty", "DealerManagementSystemID", null, 0, 0)
 	}
-	
-	
-	
 }

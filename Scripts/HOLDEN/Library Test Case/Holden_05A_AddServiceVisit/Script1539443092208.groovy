@@ -26,6 +26,10 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WSBuiltInKey
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUiBuiltInKeywords
 import com.sun.jna.platform.win32.WinNT.ACCESS_ACEStructure
+
+import holdenObject.ProcessService
+import holdenObject.Common
+
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -35,93 +39,27 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
  * V1. Verify response 13/10/18
  * Declare request  14/10/18
  * V2. Handle for new customer, verify customer information from Get Customer Information and from DB
+ * 
  */
 
-//CODE 
-//## DECLARE VIABLE
-println GlobalVariable.Glb_FirstName
-println GlobalVariable.Glb_LastName
-println GlobalVariable.Glb_DocumentId
-println GlobalVariable.Glb_veh_ManufacturerName
-//## PROCESS API
-//Declare request
-	RequestObject ProcessServiceVisit = findTestObject('Holden/Holden_05A_AddServiceVisit', [('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code, 
-	('obj_DocumentID') : GlobalVariable.Glb_DocumentId, 
-	('Obj_GivenName') : GlobalVariable.Glb_FirstName, 
-	('Obj_FamilyName') : GlobalVariable.Glb_LastName, 
-	('obj_LineOne') : GlobalVariable.Glb_Cus_LineOne, 
-	('obj_CityName') : GlobalVariable.Glb_Cus_CityName, 
-	('obj_CountryId') : GlobalVariable.Glb_Cus_CountryID, 
-	('obj_PostCode') : GlobalVariable.Glb_Cus_Postcode, 
-	('obj_State') : GlobalVariable.Glb_Cus_State, 
-	('obj_ChannelCode') : GlobalVariable.Glb_Cus_ChannelCode, 
-	('obj_PhoneNumber') : GlobalVariable.Glb_Cus_PhoneNumber, 
-	('obj_Email') : GlobalVariable.Glb_Cus_Email, 
-	('obj_Model') : GlobalVariable.Glb_veh_Model, 
-	('obj_ModelYear') : GlobalVariable.Glb_veh_ModelYear, 
-	('obj_MakeString') : GlobalVariable.Glb_veh_MakeString, 
-	('obj_ManufacturerName') : GlobalVariable.Glb_veh_ManufacturerName, 
-	('obj_VIN') : GlobalVariable.Glb_veh_VehicleId, 
-	('obj_AdvisorId') : GlobalVariable.Glb_Adv_Id, 
-	('obj_AdvisorGivenName') : GlobalVariable.Glb_Adv_FirstName, 
-	('obj_AdvisorFamilyName') : GlobalVariable.Glb_Adv_LastName, 
-	('obj_PartyId') : GlobalVariable.Glb_PartyID, 
-	('obj_DateAppointment') : GlobalVariable.Glb_ServiceDate, 
-	('obj_DateEndAppointment') : GlobalVariable.Glb_ServiceEndDate, 
-	('obj_LaborCode') : GlobalVariable.Glb_Ser_LaborCode, 
-	('obj_LaborDescription') : GlobalVariable.Glb_Ser_LaborDescription])
-//Declare response
-	ResponseObject res_ProcessServiceVisit = WS.sendRequest(ProcessServiceVisit)
+//BEFORE
+	ResponseObject res_ProcessServiceVisit
+	Common common = new Common()
+	ProcessService proAdd = new ProcessService()
+//TEST CASE
+	 res_ProcessServiceVisit = proAdd.getResponseTestCaseProcessServiceVisitForAddDeleteCase()
+	 if(common.validateInvalidDealerCode(res_ProcessServiceVisit)){}
+	 	else{
+			 common.verifyStatusCodeIs200OK(res_ProcessServiceVisit)
+			 GlobalVariable.Glb_BookingStatus = "current"
+			 common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
+			 common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
+			 
+			 common.setStatusPassedForTestCaseWithTypeInput("add")
+		 }
+
 	
-//## RESPONSE ACCESS
-//All negative case
-	//Invalid dealer code
-	if(!(GlobalVariable.Glb_Dealer_Code == '299560')){
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyResponseCode_Msg'(res_ProcessServiceVisit, 200, "Dealer "+ GlobalVariable.Glb_Dealer_Code +" Not Authorized")
-		println "Dealer Code invalid"
-		}
-	//Start Date is Past
-	//End Date is before Start Date
-	//Invalid Advisor
-	/**
-	 * Use If/ If else Statement
-	 */
-	else{
-	
-	//## VALID RESPONSE VERIFICATION
-	//Validate Response Status Code
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyResponseCode_Msg'(res_ProcessServiceVisit, 200, "")
-		GlobalVariable.Glb_BookingStatus = "current"
-	//Validate "Sender" of Application Area
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "CreatorNameCode", "GM", 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "SenderNameCode", "OSS", 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "DealerCountryCode", "US", 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "LanguageCode", "en-US", 0, 0)
-		
-	//Validate "Destination" of Application Area
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DestinationNameCode", "QI", 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DestinationSoftwareCode", "QI", 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DestinationSoftware", "QI", 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DealerTargetCountry", "US", 0, 0)
-	
-	//Validate "Sender" of Acknowledge Service Area
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "CreatorNameCode", "GM", 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "SenderNameCode", "OSS", 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "DealerCountryCode", "US", 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Sender", "LanguageCode", "en-US", 1, 0)
-		
-	//Validate "Destination" of Acknowledge Service Area
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DestinationNameCode", "QI", 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DestinationSoftwareCode", "QI", 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DestinationSoftware", "QI", 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 1, 0)
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyValueSOAPNode'(res_ProcessServiceVisit, "Destination", "DealerTargetCountry", "US", 1, 0)
-	
-	//Validate "actionCode" = Accepted
-		CustomKeywords.'qaVinhLe.Library_Method_VinhLe.verifyAttributeSOAPNode'(res_ProcessServiceVisit, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
+
 	
 	//Validate Customer Information
 		if(GlobalVariable.Glb_CustomerType.toString().toLowerCase() == 'old'){

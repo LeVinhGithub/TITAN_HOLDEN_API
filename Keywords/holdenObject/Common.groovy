@@ -106,13 +106,19 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void verifyNewCustomerInformationResponse(ResponseObject response){
 		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
-		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
-		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
+				verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+				verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
+				verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
+				verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
+				verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
+				verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
+				verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
+	}
+	
+	@Keyword
+	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response){
+		verifyOldCustomerInformationResponse(response)
+		verifyVehicleInformationResponse(response)
 	}
 
 	@Keyword
@@ -120,9 +126,9 @@ class Common extends Library_Method_VinhLe{
 		def conn = createSQLConnection()
 		def sql = new Sql(conn)
 		String queryCustomer = "select TE.TRADING_ENTITY_KEY,STREET_LINE_1,SUBURB,POSTCODE,CP.PHONE_NO,CO.EMAIL from TRADING_ENTITY TE"+
-			" join CONTACT_ADDRESS CA on TE.CONTACT_KEY = CA.CONTACT_KEY join CONTACT_PHONE CP on TE.CONTACT_KEY = CP.CONTACT_KEY"+
-			" join CONTACT CO on TE.CONTACT_KEY = CO.CONTACT_KEY"+
-			" where TE.NAME = '"+GlobalVariable.Glb_FirstName+" "+GlobalVariable.Glb_LastName+ "'"
+				" join CONTACT_ADDRESS CA on TE.CONTACT_KEY = CA.CONTACT_KEY join CONTACT_PHONE CP on TE.CONTACT_KEY = CP.CONTACT_KEY"+
+				" join CONTACT CO on TE.CONTACT_KEY = CO.CONTACT_KEY"+
+				" where TE.NAME = '"+GlobalVariable.Glb_FirstName+" "+GlobalVariable.Glb_LastName+ "'"
 		boolean stopCondition = false
 		sql.eachRow(queryCustomer) {row ->
 			if(!stopCondition){
@@ -133,16 +139,16 @@ class Common extends Library_Method_VinhLe{
 				assert GlobalVariable.Glb_Cus_PhoneNumber.toString() == row.PHONE_NO as String
 				assert GlobalVariable.Glb_Cus_Email.toString() == row.EMAIL as String
 				stopCondition = true
-				}
 			}
+		}
 		String queryVehicle ="select * from VEHICLE where REGO_NO = '"+GlobalVariable.Glb_veh_ManufacturerName+"'"
 		sql.eachRow("select * from VEHICLE where REGO_NO = '"+GlobalVariable.Glb_veh_ManufacturerName+"'") {row ->
 			assert GlobalVariable.Glb_veh_modelKey.toString() == row.MODEL_KEY as String
 			assert GlobalVariable.Glb_Cus_TradingEntity.toString() == row.OWNER_TRADING_ENTITY_KEY as String
 			assert GlobalVariable.Glb_veh_VehicleId.toString() == row.VIN as String
-			}
-		closeSQLConnection(conn, sql)
 		}
+		closeSQLConnection(conn, sql)
+	}
 
 	@Keyword
 	void verifyVehicleInformationResponse(ResponseObject response){
@@ -155,6 +161,24 @@ class Common extends Library_Method_VinhLe{
 		verifyAttributeSOAPNode(response, "VehicleInfo", "InDistanceMeasure", "unitCode", "mile", 0, 0)
 	}
 
+	@Keyword
+	void setBookingIdFromResponseToGlobalVariable(ResponseObject response){
+		GlobalVariable.Glb_Booking_ID =  getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
+	}
+	
+	@Keyword
+	void verifyWholeAppointmentInformation(ResponseObject response){
+		setBookingIdFromResponseToGlobalVariable(response)
+		verifyBookingIdResponse(response)
+		verifyTimeAppointmentInformationResponse(response)
+		verifyGeneralAppointmentJoblineAInformationResponse(response)
+		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
+			
+		if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='true')
+			verifyGeneralAppointmentJoblineBInformationResponse(response)
+		
+	}
+	
 	@Keyword
 	void verifyBookingIdResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_Booking_ID, 1, 0)

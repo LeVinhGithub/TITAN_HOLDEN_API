@@ -40,13 +40,52 @@ import com.kms.katalon.core.mobile.helper.MobileElementCommonHelper
 import com.kms.katalon.core.util.KeywordUtil
 
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
+import groovy.sql.Sql
 
 
 class GetAdvisor extends Library_Method_VinhLe{
 
 	@Keyword
-	String getBookingIdResponse(ResponseObject response){
-		String BookingId = getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
-		return BookingId
+	ResponseObject getResponseTestCaseGetAdvisorInformation(){
+		RequestObject GetPersonel = findTestObject('Holden/Holden_03_GetPersonel', [
+			('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code])
+		return WS.sendRequest(GetPersonel)
 	}
+
+	@Keyword
+	void verifyListAdvisorBetweenGetAdvisorResponseAndDatabase(ResponseObject response){
+		//Get information of all personel
+		def listDocId = new String[100]
+		def listGivenName = new String[100]
+		def listFamilyName = new String[100]
+
+		int numberPersonel = getSizeSOAPNode(response, "DocumentID")
+		for (int i = 0;i<numberPersonel;i++){
+			listDocId[i] = getValueSOAPNode(response, "DocumentIdentification", "DocumentID", i, 0) as String
+			listGivenName[i] = getValueSOAPNode(response, "SpecifiedPerson", "GivenName", i, 0) as String
+			listFamilyName[i] = getValueSOAPNode(response, "SpecifiedPerson", "FamilyName", i, 0) as String
+		}
+
+		//Code to get data from SQL
+		String currentDate = getDateFormat("MM/dd/YYYY") //TerminationDate =currentDate
+		String advisorQuery = "exec Get_All_Service_Advisors @TerminationDate= '"+currentDate+"', @FinancialYearKey= 20"
+		int sizeSQl = getSQLSize(advisorQuery)
+
+		//Assert value
+		def conn = createSQLConnection()
+		def sql = new Sql(conn)
+		int countNumber = 0
+		//Executive query for database
+		//Read data row by row by expression eachRow
+		sql.eachRow(advisorQuery) {row ->
+			assert listDocId[countNumber] == row[0] as String
+			assert listGivenName[countNumber] == row.First_Name as String
+			assert listFamilyName[countNumber] == row.Family_Name as String
+			countNumber += 1
+
+		}
+		closeSQLConnection(conn, sql)
+	}
+
+
 }
