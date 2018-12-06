@@ -37,7 +37,7 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
 		verifyValueSOAPNode(response, "Destination", "DealerTargetCountry", "US", 0, 0)
 
-		verifyAttributeSOAPNode(response, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
+		//verifyAttributeSOAPNode(response, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
 	}
 
 	@Keyword
@@ -59,6 +59,20 @@ class Common extends Library_Method_VinhLe{
 	void verifyOldCustomerInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
 		verifyValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+		verifyCustomerAddressInformationResponse(response)
+		verifyCustomerContactInformationResponse(response)
+	}
+
+	@Keyword
+	void verifyNewCustomerInformationResponse(ResponseObject response){
+		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+		verifyCustomerAddressInformationResponse(response)
+		verifyCustomerContactInformationResponse(response)
+	}
+
+	@Keyword
+	void verifyCustomerAddressInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
@@ -68,15 +82,27 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyNewCustomerInformationResponse(ResponseObject response){
-		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
-		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
-		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
+	void verifyCustomerContactInformationResponse(ResponseObject response){
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'WORKPHONE', 0, 0)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, 0, 0)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'CELLPHONE', 0, 1)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, 0, 1)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'HOMEPHONE', 0, 2)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, 0, 2)
+
+		verifyValueSOAPNode(response, "URICommunication", "URIID", GlobalVariable.Glb_Cus_Email, 0, 0)
+	}
+
+	@Keyword
+	void verifyCustomerContactInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'WORKPHONE', noOfNode*3, noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, noOfNode*3, noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'CELLPHONE', noOfNode*3, 1+noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, noOfNode*3, 1+noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'HOMEPHONE', noOfNode*3, 2+noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, noOfNode*3, 2+noOfNode*3)
+
+		verifyValueSOAPNode(response, "URICommunication", "URIID", GlobalVariable.Glb_Cus_Email, noOfNode*3, 0)
 	}
 
 	@Keyword
@@ -138,16 +164,16 @@ class Common extends Library_Method_VinhLe{
 		verifyGeneralAppointmentJoblineAInformationResponse(response)
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
 			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
-			else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
+		else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
 	}
-	
+
 	@Keyword
 	void verifyWholeAppointmentInformationWithTwoJobline(ResponseObject response){
 		verifyWholeAppointmentInformationWithOneJobline(response)
 		verifyGeneralAppointmentJoblineBInformationResponse(response)
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
 			verifyJoblineWithOpCodeNotExistInformationResponse(response,1 )
-			else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
+		else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
 	}
 
 	@Keyword
