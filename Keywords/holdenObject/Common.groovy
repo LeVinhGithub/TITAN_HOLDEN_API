@@ -138,16 +138,16 @@ class Common extends Library_Method_VinhLe{
 		verifyGeneralAppointmentJoblineAInformationResponse(response)
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
 			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
-			else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
+		else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
 	}
-	
+
 	@Keyword
 	void verifyWholeAppointmentInformationWithTwoJobline(ResponseObject response){
 		verifyWholeAppointmentInformationWithOneJobline(response)
 		verifyGeneralAppointmentJoblineBInformationResponse(response)
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
 			verifyJoblineWithOpCodeNotExistInformationResponse(response,1 )
-			else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
+		else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
 	}
 
 	@Keyword
