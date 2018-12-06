@@ -21,6 +21,7 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void verifyStatusCodeIs200OK(ResponseObject response){
 		verifyResponseCode_Msg(response, 200, "")
+		println 'Request send successfully'
 	}
 
 	@Keyword
@@ -37,7 +38,7 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Destination", "DealerNumberID", GlobalVariable.Glb_Dealer_Code, 0, 0)
 		verifyValueSOAPNode(response, "Destination", "DealerTargetCountry", "US", 0, 0)
 
-		//verifyAttributeSOAPNode(response, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
+		verifyAttributeSOAPNode(response, "ResponseCriteria", "ResponseExpression", "actionCode", "Accepted", 0, 0)
 	}
 
 	@Keyword
@@ -260,5 +261,41 @@ class Common extends Library_Method_VinhLe{
 		if(testcaseName.toLowerCase()=='del') GlobalVariable.Glb_Status_ProcessDelete = 'passed'
 		if(testcaseName.toLowerCase()=='suba') GlobalVariable.Glb_Status_SubscriptionAdd = 'passed'
 		if(testcaseName.toLowerCase()=='subd') GlobalVariable.Glb_Status_SubscriptionDetact = 'passed'
+	}
+
+	@Keyword
+	void printAllCurrentValueGlobalVariable(){
+		println GlobalVariable.Glb_Dealer_Code
+		println GlobalVariable.Glb_ServiceDate
+		println GlobalVariable.Glb_ServiceEndDate
+		println GlobalVariable.Glb_CustomerType
+		println GlobalVariable.Glb_FirstName
+		println GlobalVariable.Glb_LastName
+		println GlobalVariable.Glb_Cus_TradingEntity
+		println GlobalVariable.Glb_Cus_LineOne
+		println GlobalVariable.Glb_Cus_CityName
+		println GlobalVariable.Glb_Cus_CountryID
+		println GlobalVariable.Glb_Cus_Postcode
+		println GlobalVariable.Glb_Cus_State
+		println GlobalVariable.Glb_Cus_ChannelCode
+		println GlobalVariable.Glb_Cus_PhoneNumber
+		println GlobalVariable.Glb_Cus_Email
+		println GlobalVariable.Glb_VehicleType
+		println GlobalVariable.Glb_veh_Model
+		println GlobalVariable.Glb_veh_ModelYear
+		println GlobalVariable.Glb_veh_MakeString
+		println GlobalVariable.Glb_veh_ManufacturerName
+		println GlobalVariable.Glb_veh_VehicleId
+		println GlobalVariable.Glb_Ser_LaborCode
+		println GlobalVariable.Glb_Ser_LaborDescription
+		println GlobalVariable.Glb_AdvisorType
+		println GlobalVariable.Glb_Booking_ID
+		println GlobalVariable.Glb_ChangeDate
+		println GlobalVariable.Glb_ChangeChangeCustomerVehicle
+		println GlobalVariable.Glb_ChangeChangeOpCodeContent
+		println GlobalVariable.Glb_AddJobLine
+		println GlobalVariable.Glb_StartSearchDate
+		println GlobalVariable.Glb_EndSearchDate
+		println GlobalVariable.Glb_DocumentId
 	}
 }

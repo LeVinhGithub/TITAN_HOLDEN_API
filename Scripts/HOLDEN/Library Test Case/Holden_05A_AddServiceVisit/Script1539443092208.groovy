@@ -19,6 +19,7 @@ import internal.GlobalVariable as GlobalVariable
 	Common common = new Common()
 	ProcessService proAdd = new ProcessService()
 //TEST CASE
+	 common.printAllCurrentValueGlobalVariable()
 	 res_ProcessServiceVisit = proAdd.getResponseTestCaseProcessServiceVisitForAddDeleteCase()
 	 if(common.validateInvalidDealerCode(res_ProcessServiceVisit)){}
 	 	else{
