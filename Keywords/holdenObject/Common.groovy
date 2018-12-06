@@ -107,8 +107,10 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response){
-		verifyOldCustomerInformationResponse(response)
+	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response,boolean isTradingEntityNull){
+		if(isTradingEntityNull)
+			verifyNewCustomerInformationResponse(response)
+			else verifyOldCustomerInformationResponse(response)
 		verifyVehicleInformationResponse(response)
 	}
 

@@ -28,7 +28,7 @@ import internal.GlobalVariable as GlobalVariable
 			 common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
 			 common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
 			 common.setBookingIdFromResponseToGlobalVariable(res_ProcessServiceVisit)
-			 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit)
+			 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,true)
 			 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessServiceVisit)
 			 
 			 common.verifyCustomerAndVehicleInformationBySQL()

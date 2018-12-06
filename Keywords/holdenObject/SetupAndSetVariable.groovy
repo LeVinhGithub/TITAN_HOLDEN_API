@@ -89,6 +89,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_Adv_Id = 'invalid'
 		GlobalVariable.Glb_Adv_FirstName= 'invalid'
 		GlobalVariable.Glb_Adv_LastName= 'invalid'
+		println 'Value for Not Exist Adviosr: invalid'
 	}
 
 	@Keyword
@@ -102,7 +103,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 				GlobalVariable.Glb_Adv_Id = row[0] as String
 				GlobalVariable.Glb_Adv_FirstName= row.First_Name as String
 				GlobalVariable.Glb_Adv_LastName= row.Family_Name as String
-				println GlobalVariable.Glb_Adv_Id + GlobalVariable.Glb_Adv_FirstName  + GlobalVariable.Glb_Adv_LastName
+				println 'Value for Exist Adviosr: ' + GlobalVariable.Glb_Adv_Id + GlobalVariable.Glb_Adv_FirstName  + GlobalVariable.Glb_Adv_LastName
 			}
 			countNumber += 1
 		}
@@ -140,7 +141,6 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		if(GlobalVariable.Glb_VehicleType.toString().toLowerCase()=='new')
 			setValueNewVehicleForGlobalVariable()
 	}
-
 
 	@Keyword
 	String createValueNewCustomerForLocalVariable(String value){
@@ -198,7 +198,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		def sql = new Sql(conn)
 		sql.eachRow(cmdQuery) {row ->
 			GlobalVariable.Glb_FinancialYear = row.CURRENT_FINANCIAL_YEAR_KEY as String
-			println GlobalVariable.Glb_FinancialYear
+			println 'Financial Year is: '+GlobalVariable.Glb_FinancialYear
 		}
 		closeSQLConnection(conn, sql)
 	}
@@ -215,7 +215,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 				GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
 			else valueKey = valueKeyTemp
 		}
-		println GlobalVariable.Glb_DocumentId
+		println 'Documentation ID is: '+GlobalVariable.Glb_DocumentId
 		closeSQLConnection(conn, sql)
 	}
 
@@ -226,7 +226,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		def sql = new Sql(connection)
 		sql.eachRow(makeIdQuery) {row ->
 			makeID = row.MAKE_KEY as String
-			println makeID
+			println 'Make ID Value: '+makeID
 		}
 		return makeID
 	}
@@ -244,7 +244,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		def sql = new Sql(conn)
 		sql.eachRow(modelKeyQuery) {row ->
 			GlobalVariable.Glb_veh_modelKey = row[0] as String
-			println GlobalVariable.Glb_veh_modelKey
+			println 'Model Key is: '+GlobalVariable.Glb_veh_modelKey
 		}
 		closeSQLConnection(conn, sql)
 	}
