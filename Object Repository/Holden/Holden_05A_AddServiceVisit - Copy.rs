@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>Holden_05A_AddServiceVisit</name>
+   <name>Holden_05A_AddServiceVisit - Copy</name>
    <tag></tag>
-   <elementGuidId>2146a771-99c2-4644-9ea5-d1be7bb70fda</elementGuidId>
+   <elementGuidId>fda5c840-f09f-489c-99d5-e03bfd129fa8</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <httpBody></httpBody>
@@ -89,37 +89,37 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 						&lt;ns:ServiceVisitHeader>
 							&lt;ns:DocumentIdentificationGroup>
 								&lt;ns:DocumentIdentification>
-									&lt;ns:DocumentID>${obj_DocumentID}&lt;/ns:DocumentID>
+									&lt;ns:DocumentID>69246685&lt;/ns:DocumentID>
 								&lt;/ns:DocumentIdentification>
 							&lt;/ns:DocumentIdentificationGroup>
 							&lt;ns:CustomerInfo>
 								&lt;ns:AppointmentContactParty>
 									&lt;ns:SpecifiedPerson>
-										&lt;ns:GivenName>${Obj_GivenName}&lt;/ns:GivenName>
-										&lt;ns:FamilyName>${Obj_FamilyName}&lt;/ns:FamilyName>
+										&lt;ns:GivenName>QATEAM_VINHLE181206172329&lt;/ns:GivenName>
+										&lt;ns:FamilyName>HOLDEN181206172329&lt;/ns:FamilyName>
 										&lt;ns:ResidenceAddress>
-											&lt;ns:LineOne>${obj_LineOne}&lt;/ns:LineOne>
-											&lt;ns:CityName>${obj_CityName}&lt;/ns:CityName>
-											&lt;ns:CountryID>${obj_CountryId}&lt;/ns:CountryID>
-											&lt;ns:Postcode>${obj_PostCode}&lt;/ns:Postcode>
-											&lt;ns:StateOrProvinceCountrySub-DivisionID>${obj_State}&lt;/ns:StateOrProvinceCountrySub-DivisionID>
+											&lt;ns:LineOne>182 Le Dai Hanh&lt;/ns:LineOne>
+											&lt;ns:CityName>Titan&lt;/ns:CityName>
+											&lt;ns:CountryID>1&lt;/ns:CountryID>
+											&lt;ns:Postcode>1804&lt;/ns:Postcode>
+											&lt;ns:StateOrProvinceCountrySub-DivisionID>VN&lt;/ns:StateOrProvinceCountrySub-DivisionID>
 										&lt;/ns:ResidenceAddress>
 										&lt;ns:TelephoneCommunication>
 											&lt;ns:TelephoneCommunication>
 												&lt;ns:ChannelCode>WORKPHONE&lt;/ns:ChannelCode>
-												&lt;ns:CompleteNumber>${obj_PhoneNumber}&lt;/ns:CompleteNumber>
+												&lt;ns:CompleteNumber>0983612137&lt;/ns:CompleteNumber>
 											&lt;/ns:TelephoneCommunication>
 											&lt;ns:TelephoneCommunication>
 												&lt;ns:ChannelCode>CELLPHONE&lt;/ns:ChannelCode>
-												&lt;ns:CompleteNumber>${obj_PhoneNumber}&lt;/ns:CompleteNumber>
+												&lt;ns:CompleteNumber>0983612137&lt;/ns:CompleteNumber>
 											&lt;/ns:TelephoneCommunication>
 											&lt;ns:TelephoneCommunication>
 												&lt;ns:ChannelCode>HOMEPHONE&lt;/ns:ChannelCode>
-												&lt;ns:CompleteNumber>${obj_PhoneNumber}&lt;/ns:CompleteNumber>
+												&lt;ns:CompleteNumber>0983612137&lt;/ns:CompleteNumber>
 											&lt;/ns:TelephoneCommunication>
 										&lt;/ns:TelephoneCommunication>			
 										&lt;ns:URICommunication>
-											&lt;ns:URIID>${obj_Email}&lt;/ns:URIID>
+											&lt;ns:URIID>levinh.hcmut@gmail.com&lt;/ns:URIID>
 											&lt;ns:ChannelCode>EMAIL&lt;/ns:ChannelCode>
 										&lt;/ns:URICommunication>
 										&lt;ns:ContactMethodTypeCode>Day Phone&lt;/ns:ContactMethodTypeCode>
@@ -128,11 +128,11 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 							&lt;/ns:CustomerInfo>
 							&lt;ns:VehicleInfo>
 								&lt;ns:Vehicle>
-									&lt;ns:Model>${obj_Model}&lt;/ns:Model>
-									&lt;ns:ModelYear>${obj_ModelYear}&lt;/ns:ModelYear>
-									&lt;ns:MakeString>${obj_MakeString}&lt;/ns:MakeString>
-									&lt;ns:ManufacturerName>${obj_ManufacturerName}&lt;/ns:ManufacturerName>
-                                  	&lt;ns:VehicleID>${obj_VIN}&lt;/ns:VehicleID>
+									&lt;ns:Model>10718&lt;/ns:Model>
+									&lt;ns:ModelYear>0&lt;/ns:ModelYear>
+									&lt;ns:MakeString>FIAT&lt;/ns:MakeString>
+									&lt;ns:ManufacturerName>REGNUMBER181206172329&lt;/ns:ManufacturerName>
+                                  	&lt;ns:VehicleID>VNVNV181206172329&lt;/ns:VehicleID>
 								&lt;/ns:Vehicle>
 								&lt;ns:InDistanceMeasure unitCode=&quot;mile&quot;>5000&lt;/ns:InDistanceMeasure>
 							&lt;/ns:VehicleInfo>
@@ -148,11 +148,11 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 								&lt;/ns:ServiceVisitAppointmentHeader>
 								&lt;ns:ServiceVisitAppointmentDetail>
 									&lt;ns:Appointment>
-										&lt;ns:AppointmentDateTime>${obj_DateAppointment}&lt;/ns:AppointmentDateTime>
+										&lt;ns:AppointmentDateTime>2018-12-07T22:50:00&lt;/ns:AppointmentDateTime>
 										&lt;ns:AppointmentNotes>Please wash car. Thank you.&lt;/ns:AppointmentNotes>
 										&lt;ns:AppointmentStatus>SCHEDULED&lt;/ns:AppointmentStatus>
 										&lt;ns:AlternateTransportation>WAIT_AT_DEALER&lt;/ns:AlternateTransportation>
-										&lt;ns:EndAppointmentDateTime>${obj_DateEndAppointment}&lt;/ns:EndAppointmentDateTime>
+										&lt;ns:EndAppointmentDateTime>2018-12-07T22:55:00&lt;/ns:EndAppointmentDateTime>
 										&lt;ns:RequestedService>
 											&lt;ns:JobNumberString>A&lt;/ns:JobNumberString>
 											&lt;ns:RepeatRepairIndicator>false&lt;/ns:RepeatRepairIndicator>

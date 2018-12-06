@@ -21,6 +21,7 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void verifyStatusCodeIs200OK(ResponseObject response){
 		verifyResponseCode_Msg(response, 200, "")
+		println 'Request send successfully'
 	}
 
 	@Keyword
@@ -59,6 +60,20 @@ class Common extends Library_Method_VinhLe{
 	void verifyOldCustomerInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
 		verifyValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+		verifyCustomerAddressInformationResponse(response)
+		verifyCustomerContactInformationResponse(response)
+	}
+
+	@Keyword
+	void verifyNewCustomerInformationResponse(ResponseObject response){
+		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+		verifyCustomerAddressInformationResponse(response)
+		verifyCustomerContactInformationResponse(response)
+	}
+
+	@Keyword
+	void verifyCustomerAddressInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
@@ -68,15 +83,27 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyNewCustomerInformationResponse(ResponseObject response){
-		GlobalVariable.Glb_Cus_TradingEntity = getValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", 0, 0)
-		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
-		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
-		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
+	void verifyCustomerContactInformationResponse(ResponseObject response){
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'WORKPHONE', 0, 0)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, 0, 0)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'CELLPHONE', 0, 1)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, 0, 1)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'HOMEPHONE', 0, 2)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, 0, 2)
+
+		verifyValueSOAPNode(response, "URICommunication", "URIID", GlobalVariable.Glb_Cus_Email, 0, 0)
+	}
+
+	@Keyword
+	void verifyCustomerContactInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'WORKPHONE', noOfNode*3, noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, noOfNode*3, noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'CELLPHONE', noOfNode*3, 1+noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, noOfNode*3, 1+noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "ChannelCode", 'HOMEPHONE', noOfNode*3, 2+noOfNode*3)
+		verifyValueSOAPNode(response, "TelephoneCommunication", "CompleteNumber", GlobalVariable.Glb_Cus_PhoneNumber, noOfNode*3, 2+noOfNode*3)
+
+		verifyValueSOAPNode(response, "URICommunication", "URIID", GlobalVariable.Glb_Cus_Email, noOfNode*3, 0)
 	}
 
 	@Keyword
@@ -234,5 +261,41 @@ class Common extends Library_Method_VinhLe{
 		if(testcaseName.toLowerCase()=='del') GlobalVariable.Glb_Status_ProcessDelete = 'passed'
 		if(testcaseName.toLowerCase()=='suba') GlobalVariable.Glb_Status_SubscriptionAdd = 'passed'
 		if(testcaseName.toLowerCase()=='subd') GlobalVariable.Glb_Status_SubscriptionDetact = 'passed'
+	}
+
+	@Keyword
+	void printAllCurrentValueGlobalVariable(){
+		println GlobalVariable.Glb_Dealer_Code
+		println GlobalVariable.Glb_ServiceDate
+		println GlobalVariable.Glb_ServiceEndDate
+		println GlobalVariable.Glb_CustomerType
+		println GlobalVariable.Glb_FirstName
+		println GlobalVariable.Glb_LastName
+		println GlobalVariable.Glb_Cus_TradingEntity
+		println GlobalVariable.Glb_Cus_LineOne
+		println GlobalVariable.Glb_Cus_CityName
+		println GlobalVariable.Glb_Cus_CountryID
+		println GlobalVariable.Glb_Cus_Postcode
+		println GlobalVariable.Glb_Cus_State
+		println GlobalVariable.Glb_Cus_ChannelCode
+		println GlobalVariable.Glb_Cus_PhoneNumber
+		println GlobalVariable.Glb_Cus_Email
+		println GlobalVariable.Glb_VehicleType
+		println GlobalVariable.Glb_veh_Model
+		println GlobalVariable.Glb_veh_ModelYear
+		println GlobalVariable.Glb_veh_MakeString
+		println GlobalVariable.Glb_veh_ManufacturerName
+		println GlobalVariable.Glb_veh_VehicleId
+		println GlobalVariable.Glb_Ser_LaborCode
+		println GlobalVariable.Glb_Ser_LaborDescription
+		println GlobalVariable.Glb_AdvisorType
+		println GlobalVariable.Glb_Booking_ID
+		println GlobalVariable.Glb_ChangeDate
+		println GlobalVariable.Glb_ChangeChangeCustomerVehicle
+		println GlobalVariable.Glb_ChangeChangeOpCodeContent
+		println GlobalVariable.Glb_AddJobLine
+		println GlobalVariable.Glb_StartSearchDate
+		println GlobalVariable.Glb_EndSearchDate
+		println GlobalVariable.Glb_DocumentId
 	}
 }
