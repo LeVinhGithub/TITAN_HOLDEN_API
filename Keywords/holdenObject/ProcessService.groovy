@@ -13,7 +13,9 @@ import qaVinhLe.Library_Method_VinhLe
 class ProcessService extends Library_Method_VinhLe{
 
 	@Keyword
-	ResponseObject getResponseTestCaseProcessServiceVisitForAddDeleteCase(){
+	ResponseObject getResponseTestCaseProcessServiceVisitForAddDeleteCase(boolean isDeleteMethod){
+		String methodType = 'Holden/Holden_05A_AddServiceVisit'
+		if(isDeleteMethod) methodType = 'Holden/Holden_05C_DeleteServiceVisit'
 		RequestObject ProcessServiceVisit = findTestObject('Holden/Holden_05A_AddServiceVisit', [
 			('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code,
 			('obj_DocumentID') : GlobalVariable.Glb_DocumentId,
@@ -41,6 +43,14 @@ class ProcessService extends Library_Method_VinhLe{
 			('obj_LaborCode') : GlobalVariable.Glb_Ser_LaborCode,
 			('obj_LaborDescription') : GlobalVariable.Glb_Ser_LaborDescription])
 		return WS.sendRequest(ProcessServiceVisit)
+	}
+	@Keyword
+	boolean validateInvalidAdvisor(ResponseObject response) {
+		if(!(GlobalVariable.Glb_AdvisorType.toString().toLowerCase() == 'exist')){
+			verifyResponseCode_Msg(response, 200, "Invalid service advisor")
+			println "Advisor is invalid"
+			return true
+		} else return false
 	}
 	
 }
