@@ -63,6 +63,14 @@ class Common extends Library_Method_VinhLe{
 		verifyCustomerAddressInformationResponse(response)
 		verifyCustomerContactInformationResponse(response)
 	}
+	
+	@Keyword
+	void verifyOldCustomerInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, noOfNode, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", GlobalVariable.Glb_Cus_TradingEntity, 1+2*noOfNode, 0)
+		verifyCustomerAddressInformationResponse(response)
+		verifyCustomerContactInformationResponse(response)
+	}
 
 	@Keyword
 	void verifyNewCustomerInformationResponse(ResponseObject response){
@@ -79,6 +87,16 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, 0, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, 0, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
+	}
+	
+	@Keyword
+	void verifyCustomerAddressInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "SpecifiedPerson", "GivenName", GlobalVariable.Glb_FirstName, noOfNode, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "LineOne", GlobalVariable.Glb_Cus_LineOne, noOfNode, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "CityName", GlobalVariable.Glb_Cus_CityName, noOfNode, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "CountryID", GlobalVariable.Glb_Cus_CountryID, noOfNode, 0)
+		verifyValueSOAPNode(response, "ResidenceAddress", "Postcode", GlobalVariable.Glb_Cus_Postcode, noOfNode, 0)
 		verifyValueSOAPNode(response, "ResidenceAddress", "StateOrProvinceCountrySub-DivisionID", GlobalVariable.Glb_Cus_State, 0, 0)
 	}
 
@@ -111,6 +129,12 @@ class Common extends Library_Method_VinhLe{
 		if(isTradingEntityNull)
 			verifyNewCustomerInformationResponse(response)
 			else verifyOldCustomerInformationResponse(response)
+			verifyVehicleInformationResponse(response)
+	}
+	
+	@Keyword
+	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response, int noOfNode){
+		verifyOldCustomerInformationResponse(response, noOfNode)
 		verifyVehicleInformationResponse(response)
 	}
 
@@ -150,13 +174,29 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Vehicle", "MakeString", GlobalVariable.Glb_veh_MakeString, 0, 0)
 		verifyValueSOAPNode(response, "Vehicle", "ManufacturerName", GlobalVariable.Glb_veh_ManufacturerName, 0, 0)
 		verifyValueSOAPNode(response, "Vehicle", "VehicleID", GlobalVariable.Glb_veh_VehicleId, 0, 0)
-
+		
 		verifyAttributeSOAPNode(response, "VehicleInfo", "InDistanceMeasure", "unitCode", "mile", 0, 0)
+	}
+	
+	@Keyword
+	void verifyVehicleInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "Vehicle", "Model", GlobalVariable.Glb_veh_modelKey, noOfNode, 0)
+		verifyValueSOAPNode(response, "Vehicle", "ModelYear", GlobalVariable.Glb_veh_ModelYear, noOfNode, 0)
+		verifyValueSOAPNode(response, "Vehicle", "MakeString", GlobalVariable.Glb_veh_MakeString, noOfNode, 0)
+		verifyValueSOAPNode(response, "Vehicle", "ManufacturerName", GlobalVariable.Glb_veh_ManufacturerName, noOfNode, 0)
+		verifyValueSOAPNode(response, "Vehicle", "VehicleID", GlobalVariable.Glb_veh_VehicleId, noOfNode, 0)
+
+		verifyAttributeSOAPNode(response, "VehicleInfo", "InDistanceMeasure", "unitCode", "mile", noOfNode, 0)
 	}
 
 	@Keyword
 	void setBookingIdFromResponseToGlobalVariable(ResponseObject response){
 		GlobalVariable.Glb_Booking_ID =  getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
+	}
+	
+	@Keyword
+	void setBookingIdFromResponseToGlobalVariable(ResponseObject response, int noOfNode){
+		GlobalVariable.Glb_Booking_ID =  getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1+2*noOfNode, 0)
 	}
 
 	@Keyword
@@ -167,7 +207,18 @@ class Common extends Library_Method_VinhLe{
 		verifyGeneralAppointmentJoblineAInformationResponse(response)
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
 			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
-		else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
+			else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
+	}
+	
+	@Keyword
+	void verifyWholeAppointmentInformationWithOneJobline(ResponseObject response, int noOfNode){
+		setBookingIdFromResponseToGlobalVariable(response, noOfNode)
+		verifyBookingIdResponse(response, noOfNode)
+		verifyTimeAppointmentInformationResponse(response, noOfNode)
+		verifyGeneralAppointmentJoblineAInformationResponse(response, noOfNode)
+		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
+			verifyJoblineWithOpCodeNotExistInformationResponse(response, noOfNode)
+		else verifyJoblineWithOpCodeExistInformationResponse(response, noOfNode)
 	}
 
 	@Keyword
@@ -183,17 +234,34 @@ class Common extends Library_Method_VinhLe{
 	void verifyBookingIdResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_Booking_ID, 1, 0)
 	}
+	
+	@Keyword
+	void verifyBookingIdResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_Booking_ID, 1+2*noOfNode, 0)
+	}
 
 	@Keyword
 	void verifyTimeAppointmentInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , 0, 0)
 		verifyValueSOAPNode(response, "Appointment", "EndAppointmentDateTime", GlobalVariable.Glb_ServiceEndDate, 0, 0)
 	}
+	
+	@Keyword
+	void verifyTimeAppointmentInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , noOfNode, 0)
+		verifyValueSOAPNode(response, "Appointment", "EndAppointmentDateTime", GlobalVariable.Glb_ServiceEndDate, noOfNode, 0)
+	}
 
 	@Keyword
 	void verifyGeneralAppointmentJoblineAInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "A", 0, 0)
 		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 0, 0)
+	}
+	
+	@Keyword
+	void verifyGeneralAppointmentJoblineAInformationResponse(ResponseObject response, int noOfNode){
+		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "A", noOfNode, 0)
+		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", noOfNode, 0)
 	}
 
 	@Keyword

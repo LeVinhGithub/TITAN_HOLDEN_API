@@ -47,7 +47,7 @@ class GetService extends Library_Method_VinhLe{
 	@Keyword
 	ResponseObject getResponseTestCaseGetServiceDetailInformation(){
 		RequestObject GetServiceVisit = findTestObject('Holden/Holden_07_GetServiceVisit', [
-			('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code, 
+			('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code,
 			('obj_BookingId') : GlobalVariable.Glb_Booking_ID])
 		return WS.sendRequest(GetServiceVisit)
 	}

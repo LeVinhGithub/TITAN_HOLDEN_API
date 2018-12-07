@@ -45,8 +45,17 @@ import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 class SearchService extends Library_Method_VinhLe{
 
 	@Keyword
-	String getBookingIdResponse(ResponseObject response){
-		String BookingId = getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
-		return BookingId
+	ResponseObject getResponseTestCaseSearchServiceInformation(){
+		RequestObject SearchServiceVisit = findTestObject('Holden/Holden_06_SearchServiceVisit', [
+          ('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code            , 
+          ('obj_StartSearchDate') : GlobalVariable.Glb_StartSearchDate, 
+          ('obj_EndSearchDate') : GlobalVariable.Glb_EndSearchDate])
+		return WS.sendRequest(SearchServiceVisit)
 	}
+	
+	@Keyword
+	int getIndexOfExpectedROInDOM(ResponseObject response){
+		return getLocatorValueSOAPNodeforHoldenOSS(response, 'ServiceVisit',"DocumentIdentification", "DocumentID", GlobalVariable.Glb_Booking_ID )
+	}
+	
 }

@@ -11,9 +11,11 @@ import internal.GlobalVariable as GlobalVariable
  * V0. Create framework 09/10/18
  * V1. Verify response 13/10/18
  * Declare request  14/10/18
+ * Transfer new framework 07/12/18
  */
 
-ResponseObject res_GetServiceVisit
+//BEFORE
+	ResponseObject res_GetServiceVisit
 	Common common = new Common()
 	GetService getSer = new GetService()
 //TEST CASE
