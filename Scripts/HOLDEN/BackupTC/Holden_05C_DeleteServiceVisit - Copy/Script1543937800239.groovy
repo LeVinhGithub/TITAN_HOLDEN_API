@@ -44,9 +44,9 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 //Declare request
 	RequestObject ProcessServiceVisit = findTestObject('Holden/Holden_05C_DeleteServiceVisit', [
 	('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code, 
+	('obj_DocumentId') : GlobalVariable.Glb_DocumentId, 
 	('Obj_GivenName') : GlobalVariable.Glb_FirstName, 
 	('Obj_FamilyName') : GlobalVariable.Glb_LastName, 
-	('obj_DocumentId') : GlobalVariable.Glb_DocumentId, 
 	('obj_LineOne') : GlobalVariable.Glb_Cus_LineOne, 
 	('obj_CityName') : GlobalVariable.Glb_Cus_CityName, 
 	('obj_CountryId') : GlobalVariable.Glb_Cus_CountryID, 

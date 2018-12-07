@@ -63,7 +63,7 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 					&lt;ns:Sender>
 						&lt;ns:CreatorNameCode>GM&lt;/ns:CreatorNameCode>
 						&lt;ns:SenderNameCode>OSS&lt;/ns:SenderNameCode>
-						&lt;ns:DealerNumberID>${obj_DealerCode}&lt;/ns:DealerNumberID>
+						&lt;ns:DealerNumberID>299560&lt;/ns:DealerNumberID>
 						&lt;ns:DealerCountryCode>US&lt;/ns:DealerCountryCode>
 						&lt;ns:LanguageCode>en-US&lt;/ns:LanguageCode>
 					&lt;/ns:Sender>
@@ -82,21 +82,21 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 				&lt;ns:ProcessServiceVisitDataArea>
 					&lt;ns:Process>
 						&lt;ns1:ActionCriteria>
-							&lt;ns1:ActionExpression actionCode=&quot;Add&quot;>Add&lt;/ns1:ActionExpression>
+							&lt;ns1:ActionExpression actionCode=&quot;Delete&quot;>Delete&lt;/ns1:ActionExpression>
 						&lt;/ns1:ActionCriteria>
 					&lt;/ns:Process>
 					&lt;ns:ServiceVisit>
 						&lt;ns:ServiceVisitHeader>
 							&lt;ns:DocumentIdentificationGroup>
 								&lt;ns:DocumentIdentification>
-									&lt;ns:DocumentID>69246685&lt;/ns:DocumentID>
+									&lt;ns:DocumentID>69246696&lt;/ns:DocumentID>
 								&lt;/ns:DocumentIdentification>
 							&lt;/ns:DocumentIdentificationGroup>
 							&lt;ns:CustomerInfo>
 								&lt;ns:AppointmentContactParty>
 									&lt;ns:SpecifiedPerson>
-										&lt;ns:GivenName>QATEAM_VINHLE181206172329&lt;/ns:GivenName>
-										&lt;ns:FamilyName>HOLDEN181206172329&lt;/ns:FamilyName>
+										&lt;ns:GivenName>QATEAM_VINHLE181207162307&lt;/ns:GivenName>
+										&lt;ns:FamilyName>HOLDEN181207162307&lt;/ns:FamilyName>
 										&lt;ns:ResidenceAddress>
 											&lt;ns:LineOne>182 Le Dai Hanh&lt;/ns:LineOne>
 											&lt;ns:CityName>Titan&lt;/ns:CityName>
@@ -128,11 +128,11 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 							&lt;/ns:CustomerInfo>
 							&lt;ns:VehicleInfo>
 								&lt;ns:Vehicle>
-									&lt;ns:Model>10718&lt;/ns:Model>
+									&lt;ns:Model>MY16&lt;/ns:Model>
 									&lt;ns:ModelYear>0&lt;/ns:ModelYear>
 									&lt;ns:MakeString>FIAT&lt;/ns:MakeString>
-									&lt;ns:ManufacturerName>REGNUMBER181206172329&lt;/ns:ManufacturerName>
-                                  	&lt;ns:VehicleID>VNVNV181206172329&lt;/ns:VehicleID>
+									&lt;ns:ManufacturerName>REGNUMBER181207162307&lt;/ns:ManufacturerName>
+                                  	&lt;ns:VehicleID>VNVNV181207162307&lt;/ns:VehicleID>
 								&lt;/ns:Vehicle>
 								&lt;ns:InDistanceMeasure unitCode=&quot;mile&quot;>5000&lt;/ns:InDistanceMeasure>
 							&lt;/ns:VehicleInfo>
@@ -142,34 +142,34 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
 								&lt;ns:ServiceVisitAppointmentHeader>
 									&lt;ns:DocumentIdentificationGroup>
 										&lt;ns:DocumentIdentification>
-											&lt;ns:DocumentID>&lt;/ns:DocumentID>
+											&lt;ns:DocumentID>257872&lt;/ns:DocumentID>
 										&lt;/ns:DocumentIdentification>
 									&lt;/ns:DocumentIdentificationGroup>
 								&lt;/ns:ServiceVisitAppointmentHeader>
 								&lt;ns:ServiceVisitAppointmentDetail>
 									&lt;ns:Appointment>
-										&lt;ns:AppointmentDateTime>2018-12-07T22:50:00&lt;/ns:AppointmentDateTime>
+										&lt;ns:AppointmentDateTime>2018-12-07T21:50:00&lt;/ns:AppointmentDateTime>
 										&lt;ns:AppointmentNotes>Please wash car. Thank you.&lt;/ns:AppointmentNotes>
-										&lt;ns:AppointmentStatus>SCHEDULED&lt;/ns:AppointmentStatus>
+										&lt;ns:AppointmentStatus>CANCELLED&lt;/ns:AppointmentStatus>
 										&lt;ns:AlternateTransportation>WAIT_AT_DEALER&lt;/ns:AlternateTransportation>
-										&lt;ns:EndAppointmentDateTime>2018-12-07T22:55:00&lt;/ns:EndAppointmentDateTime>
+										&lt;ns:EndAppointmentDateTime>2018-12-07T21:55:00&lt;/ns:EndAppointmentDateTime>
 										&lt;ns:RequestedService>
 											&lt;ns:JobNumberString>A&lt;/ns:JobNumberString>
 											&lt;ns:RepeatRepairIndicator>false&lt;/ns:RepeatRepairIndicator>
 											&lt;ns:JobTypeString>Customer Pay&lt;/ns:JobTypeString>
 											&lt;ns:ServiceLaborScheduling>
 												&lt;ns:LaborOperationID>1&lt;/ns:LaborOperationID>
-												&lt;ns:LaborOperationIdTypeCode>${obj_LaborCode}&lt;/ns:LaborOperationIdTypeCode>
-												&lt;ns:LaborOperationDescription>${obj_LaborDescription}&lt;/ns:LaborOperationDescription>
+												&lt;ns:LaborOperationIdTypeCode>S75I&lt;/ns:LaborOperationIdTypeCode>
+												&lt;ns:LaborOperationDescription>GENERIC - Carry out 75,000km intermediate service&lt;/ns:LaborOperationDescription>
 											&lt;/ns:ServiceLaborScheduling>
-											&lt;ns:CustomerSalesRequestDescription>${obj_LaborDescription}&lt;/ns:CustomerSalesRequestDescription>
+											&lt;ns:CustomerSalesRequestDescription>GENERIC - Carry out 75,000km intermediate service&lt;/ns:CustomerSalesRequestDescription>
 										&lt;/ns:RequestedService>
 										&lt;ns:ServiceAdvisorParty>
-											&lt;ns:PartyID>${obj_PartyId}&lt;/ns:PartyID>
-											&lt;ns:DealerManagementSystemID>${obj_AdvisorId}&lt;/ns:DealerManagementSystemID>
+											&lt;ns:PartyID>553058218&lt;/ns:PartyID>
+											&lt;ns:DealerManagementSystemID>agrim&lt;/ns:DealerManagementSystemID>
 											&lt;ns:SpecifiedPerson>
-												&lt;ns:GivenName>${obj_AdvisorGivenName}&lt;/ns:GivenName>
-												&lt;ns:FamilyName>${obj_AdvisorFamilyName}&lt;/ns:FamilyName>
+												&lt;ns:GivenName>Andrew&lt;/ns:GivenName>
+												&lt;ns:FamilyName>Grima&lt;/ns:FamilyName>
 											&lt;/ns:SpecifiedPerson>
 										&lt;/ns:ServiceAdvisorParty>
 									&lt;/ns:Appointment>

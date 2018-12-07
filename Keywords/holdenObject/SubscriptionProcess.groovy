@@ -16,12 +16,12 @@ class SubscriptionProcess extends Library_Method_VinhLe{
 	ResponseObject getResponseTestCaseSubscriptionWithTypeInput(String methodType){
 		if(methodType.toLowerCase()=='add')
 			methodType = 'Holden/Holden_08A_ProcessServiceSubsription_Add'
-			else methodType = 'Holden/Holden_08B_ProcessServiceSubsription_Detact'
-			RequestObject Subscription = findTestObject(methodType, [
-			                                                         ('obj_DealerId') : GlobalVariable.Glb_Dealer_Code])
-			return WS.sendRequest(Subscription)
+		else methodType = 'Holden/Holden_08B_ProcessServiceSubsription_Detact'
+		RequestObject Subscription = findTestObject(methodType, [
+			('obj_DealerId') : GlobalVariable.Glb_Dealer_Code])
+		return WS.sendRequest(Subscription)
 	}
-	
+
 	@Keyword
 	void verifyServiceSubscriptionSectionResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "ServiceSubscription", "CallbackUrl", "https://gmb2b.pp.gm.com/GlobalServiceSpecification/ProcessMessage", 0, 0)
@@ -29,5 +29,4 @@ class SubscriptionProcess extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "ServiceSubscription", "EventType", "AcknowledgeServiceAppointmentConversion", 0, 1)
 		verifyValueSOAPNode(response, "ServiceSubscription", "EventType", "ShowServiceVisit", 0, 2)
 	}
-	
 }

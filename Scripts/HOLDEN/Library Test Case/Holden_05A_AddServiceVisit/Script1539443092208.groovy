@@ -19,8 +19,7 @@ import internal.GlobalVariable as GlobalVariable
 	Common common = new Common()
 	ProcessService proAdd = new ProcessService()
 //TEST CASE
-	 common.printAllCurrentValueGlobalVariable()
-	 res_ProcessServiceVisit = proAdd.getResponseTestCaseProcessServiceVisitForAddDeleteCase(false)
+	 res_ProcessServiceVisit = proAdd.getResponseTestCaseProcessServiceVisitForAddCase()
 	 if(common.validateInvalidDealerCode(res_ProcessServiceVisit)){}
 	 	else if(proAdd.validateInvalidAdvisor(res_ProcessServiceVisit)){}
 		 	else if(common.validateStartTimeAfterEndDate(res_ProcessServiceVisit, GlobalVariable.Glb_ServiceDate, GlobalVariable.Glb_ServiceEndDate)){}

@@ -17,7 +17,7 @@ class Common extends Library_Method_VinhLe{
 			return true
 		} else return false
 	}
-	
+
 	@Keyword
 	boolean validateStartTimeAfterEndDate(ResponseObject response,Object StartDate, Object EndDate) {
 		Date dStartDate = convertStringtoDate(StartDate.toString(), "yyyy-MM-dd'T'HH:mm:ss")
@@ -222,6 +222,17 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
+	void verifyWholeAppointmentInformationWithOneJobline(ResponseObject response, boolean isCancelled){
+		setBookingIdFromResponseToGlobalVariable(response)
+		verifyBookingIdResponse(response)
+		verifyTimeAppointmentInformationResponse(response,isCancelled)
+		verifyGeneralAppointmentJoblineAInformationResponse(response)
+		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
+			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
+		else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
+	}
+
+	@Keyword
 	void verifyWholeAppointmentInformationWithOneJobline(ResponseObject response, int noOfNode){
 		setBookingIdFromResponseToGlobalVariable(response, noOfNode)
 		verifyBookingIdResponse(response, noOfNode)
@@ -256,7 +267,7 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , 0, 0)
 		verifyValueSOAPNode(response, "Appointment", "EndAppointmentDateTime", GlobalVariable.Glb_ServiceEndDate, 0, 0)
 	}
-	
+
 	@Keyword
 	void verifyTimeAppointmentInformationResponse(ResponseObject response,boolean isCancelled){
 		verifyValueSOAPNode(response, "Appointment", "AppointmentDateTime",GlobalVariable.Glb_ServiceDate , 0, 0)
@@ -354,18 +365,16 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void printAllCurrentValueGlobalVariable(){
 		println GlobalVariable.Glb_Dealer_Code
-		println GlobalVariable.Glb_ServiceDate
-		println GlobalVariable.Glb_ServiceEndDate
+		println GlobalVariable.Glb_DocumentId
 		println GlobalVariable.Glb_CustomerType
+		println GlobalVariable.Glb_Cus_TradingEntity
 		println GlobalVariable.Glb_FirstName
 		println GlobalVariable.Glb_LastName
-		println GlobalVariable.Glb_Cus_TradingEntity
 		println GlobalVariable.Glb_Cus_LineOne
 		println GlobalVariable.Glb_Cus_CityName
 		println GlobalVariable.Glb_Cus_CountryID
 		println GlobalVariable.Glb_Cus_Postcode
 		println GlobalVariable.Glb_Cus_State
-		println GlobalVariable.Glb_Cus_ChannelCode
 		println GlobalVariable.Glb_Cus_PhoneNumber
 		println GlobalVariable.Glb_Cus_Email
 		println GlobalVariable.Glb_VehicleType
@@ -374,16 +383,26 @@ class Common extends Library_Method_VinhLe{
 		println GlobalVariable.Glb_veh_MakeString
 		println GlobalVariable.Glb_veh_ManufacturerName
 		println GlobalVariable.Glb_veh_VehicleId
+		println GlobalVariable.Glb_Booking_ID
+		println GlobalVariable.Glb_ServiceDate
+		println GlobalVariable.Glb_ServiceEndDate
 		println GlobalVariable.Glb_Ser_LaborCode
 		println GlobalVariable.Glb_Ser_LaborDescription
 		println GlobalVariable.Glb_AdvisorType
-		println GlobalVariable.Glb_Booking_ID
 		println GlobalVariable.Glb_ChangeDate
 		println GlobalVariable.Glb_ChangeChangeCustomerVehicle
 		println GlobalVariable.Glb_ChangeChangeOpCodeContent
 		println GlobalVariable.Glb_AddJobLine
 		println GlobalVariable.Glb_StartSearchDate
 		println GlobalVariable.Glb_EndSearchDate
-		println GlobalVariable.Glb_DocumentId
+		println GlobalVariable.Glb_AdvisorType
+		println GlobalVariable.Glb_Adv_FirstName
+		println GlobalVariable.Glb_Adv_LastName
 	}
+	
+	@Keyword
+	void printErrorMessageforProcessService(ResponseObject response){
+		String msg = getValueSOAPNode(response, "ErrorProcessMessage", "Description", 0, 0)
+	}
+	
 }
