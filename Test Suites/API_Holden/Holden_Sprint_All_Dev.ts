@@ -4,7 +4,11 @@
    <name>Holden_Sprint_All_Dev</name>
    <tag></tag>
    <isRerun>false</isRerun>
+<<<<<<< HEAD
    <lastRun>2018-12-08T16:05:43</lastRun>
+=======
+   <lastRun>2018-12-08T18:47:19</lastRun>
+>>>>>>> branch 'master' of https://github.com/LeVinhGithub/TITAN_HOLDEN_API
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>

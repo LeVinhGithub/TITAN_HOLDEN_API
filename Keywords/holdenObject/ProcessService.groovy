@@ -75,7 +75,7 @@ class ProcessService extends Library_Method_VinhLe{
 			('obj_LaborDescription') : GlobalVariable.Glb_Ser_LaborDescription])
 		return WS.sendRequest(ProcessServiceVisit)
 	}
-	
+
 	@Keyword
 	ResponseObject getResponseTestCaseProcessServiceVisitForChangeCase(){
 		String objectRepo = "Holden/Holden_05B_ChangeServiceVisit"
@@ -118,12 +118,12 @@ class ProcessService extends Library_Method_VinhLe{
 			return true
 		} else return false
 	}
-	
+
 	@Keyword
 	void setDateForChangeDateCaseWithInput(Object dateVariable) {
-		if(dateVariable.toString().toLowerCase()!='false')
-		GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(dateVariable, "YYYY-MM-dd'T'HH:45:00")
-		GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(dateVariable, "YYYY-MM-dd'T'HH:50:00")
+		if(dateVariable.toString().toLowerCase()!='false'){
+			GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(dateVariable, "YYYY-MM-dd'T'HH:45:00")
+			GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(dateVariable, "YYYY-MM-dd'T'HH:50:00")
+		}
 	}
-	
 }

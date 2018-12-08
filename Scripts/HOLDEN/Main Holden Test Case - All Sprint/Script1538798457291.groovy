@@ -113,32 +113,12 @@ if(var_Status_GetService == 'true')
 //5. Process service Add action
 //Create Appointment
 if(var_Status_ProcessServiceChange == 'true'){
-	
-	//Use for normal situation,Global variable for this method is not re set up
-	if(!(var_ChangeLaborContent == 'true')){
-	WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_05B_ChangeServiceVisit'), [
-		('var_ChangeLaborCode') :''        ,
-		('var_ChangeLaborDescription') : '',
-		 ('var_ChangeDate') : '',
-		 ('var_ChangeNote') : '',
-		 ('var_ChangeTransport') : ''        ,
-		 ('var_ChangeJobNumber') : '',
-		 ('var_ChangeJobType') : ''],
-	 FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_05B_ChangeServiceVisit'), [:],FailureHandling.STOP_ON_FAILURE)
+	if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='true'){
+		GlobalVariable.Glb_AddJobLine = 'false'
+		WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_05B_ChangeServiceVisit'), [:],FailureHandling.STOP_ON_FAILURE)
 	}
-	else{
-		//Set the new value for Global variable
-		WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_05B_ChangeServiceVisit'), [
-			('var_ChangeLaborCode') : GlobalVariable.Glb_ChangeLaborCode ,
-			('var_ChangeLaborDescription') : GlobalVariable.Glb_ChangeLaborDescription,
-			 ('var_ChangeDate') : var_ChangeDate,
-			 ('var_ChangeNote') : GlobalVariable.Glb_ChangeDate,
-			 ('var_ChangeTransport') : GlobalVariable.Glb_ChangeDate        ,
-			 ('var_ChangeJobNumber') : GlobalVariable.Glb_ChangeDate,
-			 ('var_ChangeJobType') : GlobalVariable.Glb_ChangeDate],
-		 FailureHandling.STOP_ON_FAILURE)
-		}
-	}
+}
 		
 //5. Process service Add action
 //Create Appointment
