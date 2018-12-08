@@ -42,5 +42,4 @@ class ProcessService extends Library_Method_VinhLe{
 			('obj_LaborDescription') : GlobalVariable.Glb_Ser_LaborDescription])
 		return WS.sendRequest(ProcessServiceVisit)
 	}
-	
 }
