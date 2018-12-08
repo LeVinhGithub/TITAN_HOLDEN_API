@@ -1,52 +1,32 @@
 package holdenObject
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.checkpoint.Checkpoint
-import com.kms.katalon.core.checkpoint.CheckpointFactory
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords
-import com.kms.katalon.core.model.FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testcase.TestCaseFactory
-import com.kms.katalon.core.testdata.TestData
-import com.kms.katalon.core.testdata.TestDataFactory
-import com.kms.katalon.core.testobject.ObjectRepository
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
+import com.kms.katalon.core.testobject.RequestObject
+import com.kms.katalon.core.testobject.ResponseObject
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 
 import internal.GlobalVariable
 import qaVinhLe.Library_Method_VinhLe
-import MobileBuiltInKeywords as Mobile
-import WSBuiltInKeywords as WS
-import WebUiBuiltInKeywords as WebUI
-
-import org.openqa.selenium.WebElement
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.By
-
-import com.kms.katalon.core.mobile.keyword.internal.MobileDriverFactory
-import com.kms.katalon.core.webui.driver.DriverFactory
-
-import com.kms.katalon.core.testobject.RequestObject
-import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.testobject.ConditionType
-import com.kms.katalon.core.testobject.TestObjectProperty
-
-import com.kms.katalon.core.mobile.helper.MobileElementCommonHelper
-import com.kms.katalon.core.util.KeywordUtil
-
-import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 
 class SubscriptionProcess extends Library_Method_VinhLe{
 
 	@Keyword
-	String getBookingIdResponse(ResponseObject response){
-		String BookingId = getValueSOAPNode(response, "DocumentIdentification", "DocumentID", 1, 0)
-		return BookingId
+	ResponseObject getResponseTestCaseSubscriptionWithTypeInput(String methodType){
+		if(methodType.toLowerCase()=='add')
+			methodType = 'Holden/Holden_08A_ProcessServiceSubsription_Add'
+		else methodType = 'Holden/Holden_08B_ProcessServiceSubsription_Detact'
+		RequestObject Subscription = findTestObject(methodType, [
+			('obj_DealerId') : GlobalVariable.Glb_Dealer_Code])
+		return WS.sendRequest(Subscription)
+	}
+
+	@Keyword
+	void verifyServiceSubscriptionSectionResponse(ResponseObject response){
+		verifyValueSOAPNode(response, "ServiceSubscription", "CallbackUrl", "https://gmb2b.pp.gm.com/GlobalServiceSpecification/ProcessMessage", 0, 0)
+		verifyValueSOAPNode(response, "ServiceSubscription", "EventType", "AcknowledgeServiceVisitAppointment", 0, 0)
+		verifyValueSOAPNode(response, "ServiceSubscription", "EventType", "AcknowledgeServiceAppointmentConversion", 0, 1)
+		verifyValueSOAPNode(response, "ServiceSubscription", "EventType", "ShowServiceVisit", 0, 2)
 	}
 }

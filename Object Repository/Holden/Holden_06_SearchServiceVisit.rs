@@ -88,7 +88,7 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
                         &lt;!--Optional:-->
                         &lt;ns:SearchServiceVisitDataCriteria>
                            &lt;!--Optional:-->
-                           &lt;ns:SearchField>DateLastModified&lt;/ns:SearchField>
+                           &lt;ns:SearchField>AppointmentDateTime&lt;/ns:SearchField>
                            &lt;ns:BeginDateTime>${obj_StartSearchDate}&lt;/ns:BeginDateTime>
                            &lt;ns:EndDateTime>${obj_EndSearchDate}&lt;/ns:EndDateTime>
                         &lt;/ns:SearchServiceVisitDataCriteria>
