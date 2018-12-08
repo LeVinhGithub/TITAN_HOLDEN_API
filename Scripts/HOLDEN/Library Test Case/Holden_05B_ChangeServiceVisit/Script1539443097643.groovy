@@ -47,7 +47,7 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 	if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase() == 'true')
 		objectRepo = "Holden/Holden_05B_ChangeServiceVisit_AddOpCode"
 	
-	String StartDateService, EndDateService, OperationCode, OperationDescription, LastName, FirstName, ManufacturerName, VehicleId
+	
 
 //## PROCESS API
 //Declare request

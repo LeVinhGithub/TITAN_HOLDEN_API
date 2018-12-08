@@ -17,18 +17,17 @@ import internal.GlobalVariable as GlobalVariable
 	ResponseObject res_ProcessService
 	Common common = new Common()
 	ProcessService proDel = new ProcessService()
-	common.printAllCurrentValueGlobalVariable()
+	
 //TEST CASE
 	 res_ProcessService = proDel.getResponseTestCaseProcessServiceVisitForDeleteCase()
 	 if(common.validateInvalidDealerCode(res_ProcessService)){}
 	 	else{
-			 //common.printErrorMessageforProcessService(res_ProcessService)
+			 common.printErrorMessageforProcessService(res_ProcessService)
 			 common.verifyStatusCodeIs200OK(res_ProcessService)
 			 common.verifyApplicationAreaResponse(res_ProcessService)
 			 common.verifyAcknowledgeServiceAreaResponse(res_ProcessService)
-			 common.setBookingIdFromResponseToGlobalVariable(res_ProcessService)
 			 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessService,false)
-			 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessService)
+			 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessService,true)
 			 common.setStatusPassedForTestCaseWithTypeInput("del")
 		 }
 	

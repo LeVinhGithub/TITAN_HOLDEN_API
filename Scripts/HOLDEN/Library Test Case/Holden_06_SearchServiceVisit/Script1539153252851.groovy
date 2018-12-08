@@ -18,17 +18,18 @@ import internal.GlobalVariable as GlobalVariable
 	Common common = new Common()
 	SearchService searchSer = new SearchService()
 	int indexExpectedNode
+	common.printAllCurrentValueGlobalVariable()
 //TEST CASE
 	 res_SearchServiceVisit = searchSer.getResponseTestCaseSearchServiceInformation()
 	 if(common.validateInvalidDealerCode(res_SearchServiceVisit)){}
-	 	else{
-			 common.verifyStatusCodeIs200OK(res_SearchServiceVisit)
-			 common.verifyApplicationAreaResponse(res_SearchServiceVisit)
-			 
-			 indexExpectedNode = searchSer.getIndexOfExpectedROInDOM(res_SearchServiceVisit)
-			 common.setBookingIdFromResponseToGlobalVariable(res_SearchServiceVisit,indexExpectedNode)
-			 common.verifyExistCustomerAndVehicleInformationResponse(res_SearchServiceVisit,indexExpectedNode)
-			 common.verifyWholeAppointmentInformationWithOneJobline(res_SearchServiceVisit,indexExpectedNode)
+	 	else if(common.validateStartTimeAfterEndDate(res_SearchServiceVisit, GlobalVariable.Glb_StartSearchDate, GlobalVariable.Glb_StartSearchDate)){}
+		 	else{
+				 common.verifyStatusCodeIs200OK(res_SearchServiceVisit)
+				 common.verifyApplicationAreaResponse(res_SearchServiceVisit)
 				 
-			 common.setStatusPassedForTestCaseWithTypeInput("get")
-		 }
+				 indexExpectedNode = searchSer.getIndexOfExpectedROInDOM(res_SearchServiceVisit)
+				 common.verifyExistCustomerAndVehicleInformationResponse(res_SearchServiceVisit,indexExpectedNode)
+				 common.verifyWholeAppointmentInformationWithOneJobline(res_SearchServiceVisit,indexExpectedNode)
+					 
+				 common.setStatusPassedForTestCaseWithTypeInput("get")
+			 }

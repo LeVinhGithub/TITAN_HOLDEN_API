@@ -18,18 +18,18 @@ import internal.GlobalVariable as GlobalVariable
 	ResponseObject res_GetServiceVisit
 	Common common = new Common()
 	GetService getSer = new GetService()
+	
 //TEST CASE
 	 res_GetServiceVisit = getSer.getResponseTestCaseGetServiceDetailInformation()
 	 if(common.validateInvalidDealerCode(res_GetServiceVisit)){}
-	 	else{
-			 common.verifyStatusCodeIs200OK(res_GetServiceVisit)
-			 common.verifyApplicationAreaResponse(res_GetServiceVisit)
-			 common.verifyAcknowledgeServiceAreaResponse(res_GetServiceVisit)
-			 common.setBookingIdFromResponseToGlobalVariable(res_GetServiceVisit)
-			 common.verifyExistCustomerAndVehicleInformationResponse(res_GetServiceVisit)
-			 if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='false')
-			 	common.verifyWholeAppointmentInformationWithOneJobline(res_GetServiceVisit)
-				 else common.verifyWholeAppointmentInformationWithTwoJobline(res_GetServiceVisit)
-				 
-			 common.setStatusPassedForTestCaseWithTypeInput("get")
-		 }
+	 	else if(getSer.validateNotExistBookingID(res_GetServiceVisit)){}
+		 	else{
+				 common.verifyStatusCodeIs200OK(res_GetServiceVisit)
+				 common.verifyApplicationAreaResponse(res_GetServiceVisit)
+				 common.verifyExistCustomerAndVehicleInformationResponse(res_GetServiceVisit,false)
+				 if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='false')
+				 	common.verifyWholeAppointmentInformationWithOneJobline(res_GetServiceVisit)
+					 else common.verifyWholeAppointmentInformationWithTwoJobline(res_GetServiceVisit)
+					 
+				 common.setStatusPassedForTestCaseWithTypeInput("get")
+			 }

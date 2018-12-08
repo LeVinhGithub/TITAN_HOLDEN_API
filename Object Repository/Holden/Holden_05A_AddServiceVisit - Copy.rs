@@ -14,7 +14,7 @@
    <serviceType>SOAP</serviceType>
    <soapBody>&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:wsse=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd&quot; xmlns:wsu=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd&quot; xmlns:tran=&quot;http://www.starstandards.org/webservices/2009/transport&quot; xmlns:ns=&quot;http://www.starstandard.org/STAR/5&quot; xmlns:ns1=&quot;http://www.openapplications.org/oagis/9&quot;>
    &lt;soapenv:Header>
-   &lt;wsse:Security>
+      &lt;wsse:Security>
          &lt;!--Optional:-->
          &lt;wsu:Timestamp Id=&quot;Timestamp-f1272c36-8b22-41e4-9962-4028429e5315&quot;>
             &lt;wsu:Created>2016-05-17T13:41:04.083Z&lt;/wsu:Created>
@@ -52,135 +52,50 @@ sdpxgYSkV0O8aLijdskqX1IklBTR61eOhmzBh9V0SAMxV+mfZD8i4uy2LEk=&lt;/wsse:BinarySecu
    &lt;/soapenv:Header>
    &lt;soapenv:Body>
       &lt;tran:ProcessMessage>
-		&lt;!--Optional:-->
-		&lt;tran:payload>
-		   &lt;!--Optional:-->
-		   &lt;tran:content id=&quot;0&quot;>
-			  &lt;!--Optional:-->
-			  &lt;ns:ProcessServiceVisit releaseID=&quot;5.6.4&quot; versionID=&quot;5.6.4&quot; systemEnvironmentCode=&quot;Test&quot; languageCode=&quot;en-US&quot;>
-			  &lt;!--Optional:-->
-				&lt;ns:ApplicationArea>
-					&lt;ns:Sender>
-						&lt;ns:CreatorNameCode>GM&lt;/ns:CreatorNameCode>
-						&lt;ns:SenderNameCode>OSS&lt;/ns:SenderNameCode>
-						&lt;ns:DealerNumberID>299560&lt;/ns:DealerNumberID>
-						&lt;ns:DealerCountryCode>US&lt;/ns:DealerCountryCode>
-						&lt;ns:LanguageCode>en-US&lt;/ns:LanguageCode>
-					&lt;/ns:Sender>
-					&lt;ns:CreationDateTime>2016-05-17T09:41:01.673-04:00&lt;/ns:CreationDateTime>
-					&lt;ns1:Signature/>
-					&lt;ns:BODID>5ab690dd-4580-4b00-b988-f826b83c44ca&lt;/ns:BODID>
-					&lt;ns:Destination>
-						&lt;ns:DestinationNameCode>QI&lt;/ns:DestinationNameCode>
-						&lt;ns:DestinationSoftwareCode>QI&lt;/ns:DestinationSoftwareCode>
-						&lt;ns:DestinationSoftware>QI&lt;/ns:DestinationSoftware>
-						&lt;ns:DealerNumberID>${obj_DealerCode}&lt;/ns:DealerNumberID>
-						&lt;ns:DealerTargetCountry>US&lt;/ns:DealerTargetCountry>
-					&lt;/ns:Destination>
-				&lt;/ns:ApplicationArea>
-				&lt;!--Optional:-->
-				&lt;ns:ProcessServiceVisitDataArea>
-					&lt;ns:Process>
-						&lt;ns1:ActionCriteria>
-							&lt;ns1:ActionExpression actionCode=&quot;Delete&quot;>Delete&lt;/ns1:ActionExpression>
-						&lt;/ns1:ActionCriteria>
-					&lt;/ns:Process>
-					&lt;ns:ServiceVisit>
-						&lt;ns:ServiceVisitHeader>
-							&lt;ns:DocumentIdentificationGroup>
-								&lt;ns:DocumentIdentification>
-									&lt;ns:DocumentID>69246696&lt;/ns:DocumentID>
-								&lt;/ns:DocumentIdentification>
-							&lt;/ns:DocumentIdentificationGroup>
-							&lt;ns:CustomerInfo>
-								&lt;ns:AppointmentContactParty>
-									&lt;ns:SpecifiedPerson>
-										&lt;ns:GivenName>QATEAM_VINHLE181207162307&lt;/ns:GivenName>
-										&lt;ns:FamilyName>HOLDEN181207162307&lt;/ns:FamilyName>
-										&lt;ns:ResidenceAddress>
-											&lt;ns:LineOne>182 Le Dai Hanh&lt;/ns:LineOne>
-											&lt;ns:CityName>Titan&lt;/ns:CityName>
-											&lt;ns:CountryID>1&lt;/ns:CountryID>
-											&lt;ns:Postcode>1804&lt;/ns:Postcode>
-											&lt;ns:StateOrProvinceCountrySub-DivisionID>VN&lt;/ns:StateOrProvinceCountrySub-DivisionID>
-										&lt;/ns:ResidenceAddress>
-										&lt;ns:TelephoneCommunication>
-											&lt;ns:TelephoneCommunication>
-												&lt;ns:ChannelCode>WORKPHONE&lt;/ns:ChannelCode>
-												&lt;ns:CompleteNumber>0983612137&lt;/ns:CompleteNumber>
-											&lt;/ns:TelephoneCommunication>
-											&lt;ns:TelephoneCommunication>
-												&lt;ns:ChannelCode>CELLPHONE&lt;/ns:ChannelCode>
-												&lt;ns:CompleteNumber>0983612137&lt;/ns:CompleteNumber>
-											&lt;/ns:TelephoneCommunication>
-											&lt;ns:TelephoneCommunication>
-												&lt;ns:ChannelCode>HOMEPHONE&lt;/ns:ChannelCode>
-												&lt;ns:CompleteNumber>0983612137&lt;/ns:CompleteNumber>
-											&lt;/ns:TelephoneCommunication>
-										&lt;/ns:TelephoneCommunication>			
-										&lt;ns:URICommunication>
-											&lt;ns:URIID>levinh.hcmut@gmail.com&lt;/ns:URIID>
-											&lt;ns:ChannelCode>EMAIL&lt;/ns:ChannelCode>
-										&lt;/ns:URICommunication>
-										&lt;ns:ContactMethodTypeCode>Day Phone&lt;/ns:ContactMethodTypeCode>
-									&lt;/ns:SpecifiedPerson>
-								&lt;/ns:AppointmentContactParty>
-							&lt;/ns:CustomerInfo>
-							&lt;ns:VehicleInfo>
-								&lt;ns:Vehicle>
-									&lt;ns:Model>MY16&lt;/ns:Model>
-									&lt;ns:ModelYear>0&lt;/ns:ModelYear>
-									&lt;ns:MakeString>FIAT&lt;/ns:MakeString>
-									&lt;ns:ManufacturerName>REGNUMBER181207162307&lt;/ns:ManufacturerName>
-                                  	&lt;ns:VehicleID>VNVNV181207162307&lt;/ns:VehicleID>
-								&lt;/ns:Vehicle>
-								&lt;ns:InDistanceMeasure unitCode=&quot;mile&quot;>5000&lt;/ns:InDistanceMeasure>
-							&lt;/ns:VehicleInfo>
-						&lt;/ns:ServiceVisitHeader>
-						&lt;ns:ServiceVisitDetail>
-							&lt;ns:ServiceAppointment>
-								&lt;ns:ServiceVisitAppointmentHeader>
-									&lt;ns:DocumentIdentificationGroup>
-										&lt;ns:DocumentIdentification>
-											&lt;ns:DocumentID>257872&lt;/ns:DocumentID>
-										&lt;/ns:DocumentIdentification>
-									&lt;/ns:DocumentIdentificationGroup>
-								&lt;/ns:ServiceVisitAppointmentHeader>
-								&lt;ns:ServiceVisitAppointmentDetail>
-									&lt;ns:Appointment>
-										&lt;ns:AppointmentDateTime>2018-12-07T21:50:00&lt;/ns:AppointmentDateTime>
-										&lt;ns:AppointmentNotes>Please wash car. Thank you.&lt;/ns:AppointmentNotes>
-										&lt;ns:AppointmentStatus>CANCELLED&lt;/ns:AppointmentStatus>
-										&lt;ns:AlternateTransportation>WAIT_AT_DEALER&lt;/ns:AlternateTransportation>
-										&lt;ns:EndAppointmentDateTime>2018-12-07T21:55:00&lt;/ns:EndAppointmentDateTime>
-										&lt;ns:RequestedService>
-											&lt;ns:JobNumberString>A&lt;/ns:JobNumberString>
-											&lt;ns:RepeatRepairIndicator>false&lt;/ns:RepeatRepairIndicator>
-											&lt;ns:JobTypeString>Customer Pay&lt;/ns:JobTypeString>
-											&lt;ns:ServiceLaborScheduling>
-												&lt;ns:LaborOperationID>1&lt;/ns:LaborOperationID>
-												&lt;ns:LaborOperationIdTypeCode>S75I&lt;/ns:LaborOperationIdTypeCode>
-												&lt;ns:LaborOperationDescription>GENERIC - Carry out 75,000km intermediate service&lt;/ns:LaborOperationDescription>
-											&lt;/ns:ServiceLaborScheduling>
-											&lt;ns:CustomerSalesRequestDescription>GENERIC - Carry out 75,000km intermediate service&lt;/ns:CustomerSalesRequestDescription>
-										&lt;/ns:RequestedService>
-										&lt;ns:ServiceAdvisorParty>
-											&lt;ns:PartyID>553058218&lt;/ns:PartyID>
-											&lt;ns:DealerManagementSystemID>agrim&lt;/ns:DealerManagementSystemID>
-											&lt;ns:SpecifiedPerson>
-												&lt;ns:GivenName>Andrew&lt;/ns:GivenName>
-												&lt;ns:FamilyName>Grima&lt;/ns:FamilyName>
-											&lt;/ns:SpecifiedPerson>
-										&lt;/ns:ServiceAdvisorParty>
-									&lt;/ns:Appointment>
-								&lt;/ns:ServiceVisitAppointmentDetail>
-							&lt;/ns:ServiceAppointment>
-						&lt;/ns:ServiceVisitDetail>
-					&lt;/ns:ServiceVisit>
-				&lt;/ns:ProcessServiceVisitDataArea>	
-			  &lt;/ns:ProcessServiceVisit>
-		   &lt;/tran:content>
-		&lt;/tran:payload>
+            &lt;!--Optional:-->
+            &lt;tran:payload>
+               &lt;!--Optional:-->
+               &lt;tran:content id=&quot;0&quot;>
+               &lt;!--Optional:-->
+                  &lt;ns:SearchServiceVisit releaseID=&quot;5.6.4&quot; versionID=&quot;5.6.4&quot; systemEnvironmentCode=&quot;Test&quot; languageCode=&quot;en-US&quot;>
+                     &lt;!--Optional:-->
+                     &lt;ns:ApplicationArea>
+						&lt;ns:Sender>
+							&lt;ns:CreatorNameCode>GM&lt;/ns:CreatorNameCode>
+							&lt;ns:SenderNameCode>OSS&lt;/ns:SenderNameCode>
+							&lt;ns:DealerNumberID>299560&lt;/ns:DealerNumberID>
+							&lt;ns:DealerCountryCode>US&lt;/ns:DealerCountryCode>
+							&lt;ns:LanguageCode>en-US&lt;/ns:LanguageCode>
+						&lt;/ns:Sender>
+						&lt;ns:CreationDateTime>2016-05-17T09:41:01.673-04:00&lt;/ns:CreationDateTime>
+						&lt;ns1:Signature/>
+						&lt;ns:BODID>5ab690dd-4580-4b00-b988-f826b83c44ca&lt;/ns:BODID>
+						&lt;ns:Destination>
+							&lt;ns:DestinationNameCode>QI&lt;/ns:DestinationNameCode>
+							&lt;ns:DestinationSoftwareCode>QI&lt;/ns:DestinationSoftwareCode>
+							&lt;ns:DestinationSoftware>QI&lt;/ns:DestinationSoftware>
+							&lt;ns:DealerNumberID>${obj_DealerCode}&lt;/ns:DealerNumberID>
+							&lt;ns:DealerTargetCountry>US&lt;/ns:DealerTargetCountry>
+						&lt;/ns:Destination>
+					&lt;/ns:ApplicationArea>
+                     &lt;!--Optional:-->
+                     &lt;ns:SearchServiceVisitDataArea>
+                        &lt;!--Optional:-->
+                        &lt;ns:Get uniqueIndicator=&quot;true&quot;>
+                           &lt;!--Optional:-->
+                           &lt;ns1:Expression/>
+                        &lt;/ns:Get>
+                        &lt;!--Optional:-->
+                        &lt;ns:SearchServiceVisitDataCriteria>
+                           &lt;!--Optional:-->
+                           &lt;ns:SearchField>AppointmentDateTime&lt;/ns:SearchField>
+                           &lt;ns:BeginDateTime>2018-12-08T00:00:00&lt;/ns:BeginDateTime>
+                           &lt;ns:EndDateTime>2018-12-08T23:59:00&lt;/ns:EndDateTime>
+                        &lt;/ns:SearchServiceVisitDataCriteria>
+                     &lt;/ns:SearchServiceVisitDataArea>
+                  &lt;/ns:SearchServiceVisit>
+                &lt;/tran:content>
+            &lt;/tran:payload>
       &lt;/tran:ProcessMessage>
    &lt;/soapenv:Body>
 &lt;/soapenv:Envelope></soapBody>
