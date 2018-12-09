@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.*
 
+import com.kms.katalon.core.testobject.ObjectRepository
 import com.kms.katalon.core.testobject.ResponseObject
 
 import holdenObject.Common
@@ -11,3 +12,4 @@ import holdenObject.Common
 String a = 'ok'
 String b = 'oka'
 println  a.charAt(1)
+ObjectRepository customer

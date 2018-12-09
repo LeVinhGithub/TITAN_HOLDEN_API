@@ -150,5 +150,13 @@ class ProcessService extends Library_Method_VinhLe{
 		}
 	}
 	
+	@Keyword
+	void setLaborCodeGlobalVariableForChangeLaborContentCase() {
+		if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase()!='false'){
+			println 'This testcase is changing Labor Content'
+			if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(0)=='n'){}
+				else if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(1)=='o'){}
+		}
+	}
 	
 }

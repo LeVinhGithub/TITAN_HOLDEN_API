@@ -46,6 +46,8 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 	Common common = new Common()
 	ProcessService proChange =new ProcessService()
 	proChange.setDateGlobalVariableForChangeDateCase()
+	proChange.setCustomerVehicleGlobalVariableForChangeCustomerVehicleCase()
+	proChange.setLaborCodeGlobalVariableForChangeLaborContentCase()
 	
 	common.printAllCurrentValueGlobalVariable()
 	
@@ -57,7 +59,9 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 		common.verifyStatusCodeIs200OK(res_ProcessServiceVisit)
 		common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
 		common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
-		common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,false)
-		common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessServiceVisit)
+		common.verifyExistCustomerAndVehicleInformationResponseForChangeCase(res_ProcessServiceVisit)
+		common.verifyWholeAppointmentInformationForChangeCase(res_ProcessServiceVisit)
+		
+		common.verifyCustomerAndVehicleInformationBySQL()
 		common.setStatusPassedForTestCaseWithTypeInput("cha")
 	}

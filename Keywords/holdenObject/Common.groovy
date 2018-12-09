@@ -147,6 +147,15 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
+	void verifyExistCustomerAndVehicleInformationResponseForChangeCase(ResponseObject response,Object globalVar){
+		if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='n')
+			verifyExistCustomerAndVehicleInformationResponse(response, true)
+			else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='o') 
+				verifyExistCustomerAndVehicleInformationResponse(response, false)
+	}
+
+	@Keyword
+
 	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response, int noOfNode){
 		verifyOldCustomerInformationResponse(response, noOfNode, true)
 		verifyVehicleInformationResponse(response, noOfNode)
@@ -253,6 +262,13 @@ class Common extends Library_Method_VinhLe{
 		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
 			verifyJoblineWithOpCodeNotExistInformationResponse(response,1 )
 		else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
+	}
+	
+	@Keyword
+	void verifyWholeAppointmentInformationForChangeCase(ResponseObject response){
+		if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='true')
+			verifyWholeAppointmentInformationWithOneJobline(response)
+			else verifyWholeAppointmentInformationWithTwoJobline(response)
 	}
 
 	@Keyword
