@@ -125,6 +125,14 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_LastName = common.setValueRandomWithTimeValue("lname")
 		println GlobalVariable.Glb_LastName
 	}
+	
+	@Keyword
+	void setValueOldCustomerForGlobalVariable(){
+		GlobalVariable.Glb_FirstName = ''
+		println 'Old Customer First Name: '+GlobalVariable.Glb_FirstName
+		GlobalVariable.Glb_LastName = ''
+		println 'Old Customer Last Name: '+GlobalVariable.Glb_LastName
+	}
 
 	@Keyword
 	void setValueNewVehicleForGlobalVariable(){
@@ -132,6 +140,14 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		println GlobalVariable.Glb_veh_ManufacturerName
 		GlobalVariable.Glb_veh_VehicleId = common.setValueRandomWithTimeValue("vin")
 		println GlobalVariable.Glb_veh_VehicleId
+	}
+	
+	@Keyword
+	void setValueOldVehicleForGlobalVariable(){
+		GlobalVariable.Glb_veh_ManufacturerName = ''
+		println 'Old Vehicle Rego: '+GlobalVariable.Glb_veh_ManufacturerName
+		GlobalVariable.Glb_veh_VehicleId = ''
+		println 'Old Vehicle VIN: '+GlobalVariable.Glb_veh_VehicleId
 	}
 
 	@Keyword
@@ -141,7 +157,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		if(GlobalVariable.Glb_VehicleType.toString().toLowerCase()=='new')
 			setValueNewVehicleForGlobalVariable()
 	}
-
+	
 	@Keyword
 	String createValueNewCustomerForLocalVariable(String value){
 		String createdValue = common.setValueRandomWithTimeValue(value)

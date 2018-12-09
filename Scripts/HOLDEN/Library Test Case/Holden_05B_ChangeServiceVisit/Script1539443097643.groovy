@@ -28,6 +28,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUiBuiltInKe
 import com.sun.jna.platform.win32.WinNT.ACCESS_ACEStructure
 
 import holdenObject.Common
+import holdenObject.ProcessService
 
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
@@ -43,47 +44,20 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 //CODE 
 //## DECLARE VIABLE
 	Common common = new Common()
-	String objectRepo = "Holden/Holden_05B_ChangeServiceVisit"
-	if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase() == 'true')
-		objectRepo = "Holden/Holden_05B_ChangeServiceVisit_AddOpCode"
+	ProcessService proChange =new ProcessService()
+	proChange.setDateGlobalVariableForChangeDateCase()
 	
+	common.printAllCurrentValueGlobalVariable()
 	
-
-//## PROCESS API
-//Declare request
-	RequestObject ProcessServiceVisit = findTestObject(objectRepo, [
-	('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code, 
-	('Obj_GivenName') : GlobalVariable.Glb_FirstName, 
-	('Obj_FamilyName') : GlobalVariable.Glb_LastName, 
-	('obj_DocumentId') : GlobalVariable.Glb_DocumentId, 
-	('obj_LineOne') : GlobalVariable.Glb_Cus_LineOne, 
-	('obj_CityName') : GlobalVariable.Glb_Cus_CityName, 
-	('obj_CountryId') : GlobalVariable.Glb_Cus_CountryID, 
-	('obj_PostCode') : GlobalVariable.Glb_Cus_Postcode, 
-	('obj_State') : GlobalVariable.Glb_Cus_State, 
-	('obj_ChannelCode') : GlobalVariable.Glb_Cus_ChannelCode, 
-	('obj_PhoneNumber') : GlobalVariable.Glb_Cus_PhoneNumber, 
-	('obj_Email') : GlobalVariable.Glb_Cus_Email, 
-	('obj_Model') : GlobalVariable.Glb_veh_Model, 
-	('obj_ModelYear') : GlobalVariable.Glb_veh_ModelYear, 
-	('obj_MakeString') : GlobalVariable.Glb_veh_MakeString, 
-	('obj_ManufacturerName') : GlobalVariable.Glb_veh_ManufacturerName,
-	('obj_VIN') : GlobalVariable.Glb_veh_VehicleId,
-	('obj_AdvisorId') : GlobalVariable.Glb_Adv_Id, 
-	('obj_AdvisorGivenName') : GlobalVariable.Glb_Adv_FirstName, 
-	('obj_AdvisorFamilyName') : GlobalVariable.Glb_Adv_LastName, 
-	('obj_PartyId') : GlobalVariable.Glb_PartyID, 
-	('obj_DateAppointment') : GlobalVariable.Glb_ServiceDate, 
-	('obj_LaborCode') : GlobalVariable.Glb_Ser_LaborCode, 
-	('obj_LaborDescription') : GlobalVariable.Glb_Ser_LaborDescription])
 //Declare response
-	ResponseObject res_ProcessServiceVisit = WS.sendRequest(ProcessServiceVisit)
+	ResponseObject res_ProcessServiceVisit = proChange.getResponseTestCaseProcessServiceVisitForChangeCase()
 	if(common.validateInvalidDealerCode(res_ProcessServiceVisit)){}
 	else{
+		common.printErrorMessageforProcessService(res_ProcessServiceVisit)
 		common.verifyStatusCodeIs200OK(res_ProcessServiceVisit)
 		common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
 		common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
-		common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit)
+		common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,false)
 		common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessServiceVisit)
-		common.setStatusPassedForTestCaseWithTypeInput("add")
+		common.setStatusPassedForTestCaseWithTypeInput("cha")
 	}

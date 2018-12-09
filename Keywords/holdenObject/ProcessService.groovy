@@ -12,6 +12,7 @@ import qaVinhLe.Library_Method_VinhLe
 
 class ProcessService extends Library_Method_VinhLe{
 	Common common = new Common()
+	SetupAndSetVariable setup = new SetupAndSetVariable()
 
 	@Keyword
 	ResponseObject getResponseTestCaseProcessServiceVisitForAddCase(){
@@ -104,7 +105,9 @@ class ProcessService extends Library_Method_VinhLe{
 			('obj_AdvisorGivenName') : GlobalVariable.Glb_Adv_FirstName,
 			('obj_AdvisorFamilyName') : GlobalVariable.Glb_Adv_LastName,
 			('obj_PartyId') : GlobalVariable.Glb_PartyID,
+			('obj_BookingId') : GlobalVariable.Glb_Booking_ID,
 			('obj_DateAppointment') : GlobalVariable.Glb_ServiceDate,
+			('obj_DateEndAppointment') : GlobalVariable.Glb_ServiceEndDate,
 			('obj_LaborCode') : GlobalVariable.Glb_Ser_LaborCode,
 			('obj_LaborDescription') : GlobalVariable.Glb_Ser_LaborDescription])
 		return WS.sendRequest(ProcessServiceVisit)
@@ -120,10 +123,32 @@ class ProcessService extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void setDateForChangeDateCaseWithInput(Object dateVariable) {
-		if(dateVariable.toString().toLowerCase()!='false'){
-			GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(dateVariable, "YYYY-MM-dd'T'HH:45:00")
-			GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(dateVariable, "YYYY-MM-dd'T'HH:50:00")
+	void setDateGlobalVariableForChangeDateCase() {
+		if(GlobalVariable.Glb_ChangeDate.toString().toLowerCase()!='false'){
+			println 'This testcase is changing Date Appointment'
+			GlobalVariable.Glb_ServiceDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ChangeDate, "YYYY-MM-dd'T'HH:45:00")
+			println 'New value of Service Start Date is: '+GlobalVariable.Glb_ServiceDate
+			GlobalVariable.Glb_ServiceEndDate = common.setValueDateForEachCasesWithAUTimeZone(GlobalVariable.Glb_ChangeDate, "YYYY-MM-dd'T'HH:50:00")
+			println 'New value of Service End Date is: '+GlobalVariable.Glb_ServiceEndDate
 		}
 	}
+	
+	@Keyword
+	void setCustomerVehicleGlobalVariableForChangeCustomerVehicleCase() {
+		if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase()!='false'){
+			println 'This testcase is changing Customer & Vehicle Information'
+			if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='n')
+				setup.setValueNewCustomerForGlobalVariable()
+				else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='o'){
+					setup.setValueOldCustomerForGlobalVariable()
+				}
+			if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(1)=='n')
+				setup.setValueNewVehicleForGlobalVariable()
+				else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(1)=='o'){
+					setup.setValueOldVehicleForGlobalVariable()
+				}
+		}
+	}
+	
+	
 }

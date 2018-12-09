@@ -10,4 +10,4 @@ import holdenObject.Common
  */
 String a = 'ok'
 String b = 'oka'
-assert a != b
+println  a.charAt(1)

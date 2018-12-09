@@ -93,7 +93,7 @@ if(var_Status_GetPersonel == 'true')
 //4. Get Labor Operation Code
 //Get all Labor Op Code and vrify all of them
 if(var_Status_GetLaborCode == 'true')
-	WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_04_GetLaborOperations'), [:], FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('HOLDEN/Library Test Case/Holden_04_GetLaborOperations'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 //5. Process service Add action
 //Create Appointment
