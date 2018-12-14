@@ -125,12 +125,14 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_LastName = common.setValueRandomWithTimeValue("lname")
 		println GlobalVariable.Glb_LastName
 	}
-	
+
 	@Keyword
 	void setValueOldCustomerForGlobalVariable(){
-		GlobalVariable.Glb_FirstName = ''
+		GlobalVariable.Glb_Cus_TradingEntity = '678819'
+		println 'Old Customer Trading Entity: '+GlobalVariable.Glb_Cus_TradingEntity
+		GlobalVariable.Glb_FirstName = 'QATEAM_VINHLE181208130956'
 		println 'Old Customer First Name: '+GlobalVariable.Glb_FirstName
-		GlobalVariable.Glb_LastName = ''
+		GlobalVariable.Glb_LastName = 'HOLDEN181208130956'
 		println 'Old Customer Last Name: '+GlobalVariable.Glb_LastName
 	}
 
@@ -141,13 +143,38 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		GlobalVariable.Glb_veh_VehicleId = common.setValueRandomWithTimeValue("vin")
 		println GlobalVariable.Glb_veh_VehicleId
 	}
-	
+
 	@Keyword
 	void setValueOldVehicleForGlobalVariable(){
-		GlobalVariable.Glb_veh_ManufacturerName = ''
+		GlobalVariable.Glb_veh_ManufacturerName = 'REGNUMBER181208130956'
 		println 'Old Vehicle Rego: '+GlobalVariable.Glb_veh_ManufacturerName
-		GlobalVariable.Glb_veh_VehicleId = ''
+		GlobalVariable.Glb_veh_VehicleId = 'VNVNV181208130956'
 		println 'Old Vehicle VIN: '+GlobalVariable.Glb_veh_VehicleId
+	}
+
+	@Keyword
+	void setValueExistOperationCodeForGlobalVariable(int indicator){
+		if(indicator == 0) {
+			GlobalVariable.Glb_Ser_LaborCode = 'S105I'
+			println 'Exist Operation Code changed to: '+GlobalVariable.Glb_Ser_LaborCode
+		}
+		if(indicator == 1) {
+			GlobalVariable.Glb_Ser_LaborCode = 'GENERIC - Carry out 105,000km intermediate service'
+			println 'Not Exist Operation Code changed to: '+GlobalVariable.Glb_Ser_LaborCode
+		}
+
+	}
+
+	@Keyword
+	void setValueNotExistOperationCodeForGlobalVariable(int indicator){
+		if(indicator == 0) {
+			GlobalVariable.Glb_Ser_LaborDescription = 'INVALID - CHANGE'
+			println 'Exist Operation Description changed to: '+GlobalVariable.Glb_Ser_LaborDescription
+		}
+		if(indicator == 1) {
+			GlobalVariable.Glb_Ser_LaborDescription = 'INVALID - CHANGE - GENERIC - Carry out 75,000km intermediate service'
+			println 'Not Exist Operation Description changed to: '+GlobalVariable.Glb_Ser_LaborDescription
+		}
 	}
 
 	@Keyword
@@ -157,7 +184,7 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		if(GlobalVariable.Glb_VehicleType.toString().toLowerCase()=='new')
 			setValueNewVehicleForGlobalVariable()
 	}
-	
+
 	@Keyword
 	String createValueNewCustomerForLocalVariable(String value){
 		String createdValue = common.setValueRandomWithTimeValue(value)

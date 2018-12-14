@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>Holden_08B_ProcessServiceSubsription_Detact</name>
+   <name>demo</name>
    <tag></tag>
-   <elementGuidId>661e2d22-56f7-4cde-9378-a7e8ac659681</elementGuidId>
+   <elementGuidId>b983015c-80a3-4805-baed-20ed97e8825e</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <httpBody></httpBody>
@@ -34,7 +34,7 @@
       &lt;wsa:To xmlns:wsa=&quot;http://www.w3.org/2005/08/addressing&quot;>http://localhost:1489/HoldenManufacturerInterface.asmx&lt;/wsa:To>
       &lt;wsa:From xmlns:wsa=&quot;http://www.w3.org/2005/08/addressing&quot;>GM&lt;/wsa:From>
       &lt;ns0:payloadManifest xmlns:ns0=&quot;http://www.starstandards.org/webservices/2009/transport&quot;>
-	     &lt;ns0:manifest version=&quot;5.6.4&quot; namespaceURI=&quot;http://www.starstandard.org/STAR/5&quot; element=&quot;ProcessServiceSubscription&quot; contentID=&quot;0&quot;/>
+	     &lt;ns0:manifest version=&quot;5.6.4&quot; namespaceURI=&quot;http://www.starstandard.org/STAR/5&quot; element=&quot;SearchCustomerInformation&quot; contentID=&quot;0&quot;/>
 	 &lt;/ns0:payloadManifest>
    &lt;/soapenv:Header>
    &lt;soapenv:Body>
@@ -43,64 +43,76 @@
 		&lt;tran:payload>
 		   &lt;!--Optional:-->
 		   &lt;tran:content id=&quot;0&quot;>
-		   &lt;!--Optional:-->
-			  &lt;ns:ProcessServiceSubscription releaseID=&quot;5.6.4&quot; versionID=&quot;5.6.4&quot; systemEnvironmentCode=&quot;Test&quot; languageCode=&quot;en-US&quot;>
+			  &lt;!--Optional:-->
+			  &lt;ns:SearchCustomerInformation releaseID=&quot;5.6.4&quot; versionID=&quot;5.6.4&quot; systemEnvironmentCode=&quot;Test&quot; languageCode=&quot;en-US&quot;>
 				 &lt;!--Optional:-->
 				 &lt;ns:ApplicationArea>
-				&lt;ns:Sender>
-					&lt;ns:CreatorNameCode>GM&lt;/ns:CreatorNameCode>
-					&lt;ns:SenderNameCode>OSS&lt;/ns:SenderNameCode>
-					&lt;ns:DealerNumberID>${obj_DealerId}&lt;/ns:DealerNumberID>
-					&lt;ns:DealerCountryCode>US&lt;/ns:DealerCountryCode>
-					&lt;ns:LanguageCode>en-US&lt;/ns:LanguageCode>
-				&lt;/ns:Sender>
-				&lt;ns:CreationDateTime>2016-05-17T09:41:01.673-04:00&lt;/ns:CreationDateTime>
-				&lt;ns1:Signature/>
-				&lt;ns:BODID>5ab690dd-4580-4b00-b988-f826b83c44ca&lt;/ns:BODID>
-				&lt;ns:Destination>
-					&lt;ns:DestinationNameCode>QI&lt;/ns:DestinationNameCode>
-					&lt;ns:DestinationSoftwareCode>QI&lt;/ns:DestinationSoftwareCode>
-					&lt;ns:DestinationSoftware>QI&lt;/ns:DestinationSoftware>
-					&lt;ns:DealerNumberID>${obj_DealerId}&lt;/ns:DealerNumberID>
-					&lt;ns:DealerTargetCountry>US&lt;/ns:DealerTargetCountry>
-				&lt;/ns:Destination>
-			&lt;/ns:ApplicationArea>
+					&lt;!--Optional:-->
+					&lt;ns:Sender>
+					   &lt;!--Optional:-->
+					   &lt;ns:CreatorNameCode>GM&lt;/ns:CreatorNameCode>
+					   &lt;!--Optional:-->
+					   &lt;ns:SenderNameCode>OSS&lt;/ns:SenderNameCode>
+					   &lt;!--Optional:-->
+					   &lt;ns:DealerNumberID>299560&lt;/ns:DealerNumberID>
+					   &lt;!--Optional:-->
+					   &lt;ns:DealerCountryCode>US&lt;/ns:DealerCountryCode>
+					   &lt;!--Optional:-->
+					   &lt;ns:LanguageCode>en-US&lt;/ns:LanguageCode>
+					&lt;/ns:Sender>
+					&lt;ns:CreationDateTime>2016-05-17T13:21:12.582-04:00&lt;/ns:CreationDateTime>
+					&lt;!--Optional:-->
+					&lt;ns1:Signature/>
+					&lt;!--Optional:-->
+					&lt;ns:BODID>1a122bf9-558f-45a7-b2c4-bdf7396a5b60&lt;/ns:BODID>
+					&lt;!--Optional:-->
+					&lt;ns:Destination>
+					   &lt;!--Optional:-->
+					   &lt;ns:DestinationNameCode>QI&lt;/ns:DestinationNameCode>
+					   &lt;!--Optional:-->
+					   &lt;ns:DestinationSoftwareCode>QI&lt;/ns:DestinationSoftwareCode>
+					   &lt;!--Optional:-->
+					   &lt;ns:DestinationSoftware>QI&lt;/ns:DestinationSoftware>
+					   &lt;ns:DealerNumberID>299560&lt;/ns:DealerNumberID>
+					   &lt;!--Optional:-->
+					   &lt;ns:DealerTargetCountry>US&lt;/ns:DealerTargetCountry>
+					&lt;/ns:Destination>
+				 &lt;/ns:ApplicationArea>
 				 &lt;!--Optional:-->
-				 &lt;ns:ProcessServiceSubscriptionDataArea>
+				 &lt;ns:SearchCustomerInformationDataArea>
 					&lt;!--Optional:-->
-					&lt;ns:Process acknowledgeCode=&quot;Always&quot;>
+					&lt;ns:Get uniqueIndicator=&quot;true&quot;>
 					   &lt;!--Optional:-->
-					   &lt;ns:ActionCriteria>
+					   &lt;ns1:Expression/>
+					&lt;/ns:Get>
+					&lt;!--Optional:-->
+					&lt;ns:SearchCustomerInformationCriteria>
+					   &lt;!--Optional:-->
+					   &lt;ns:VehicleInfo>
 						  &lt;!--Optional:-->
-						  &lt;ns1:ActionExpression actionCode=&quot;Delete&quot;/>
-					   &lt;/ns:ActionCriteria>
-					&lt;/ns:Process>
-					&lt;!--Optional:-->
-					&lt;ns:ServiceSubscription>
+						  &lt;ns:Vehicle/>
+					   &lt;/ns:VehicleInfo>
 					   &lt;!--Optional:-->
-					   &lt;ns:CallbackUrl>https://gmb2b.pp.gm.com/GlobalServiceSpecification/ProcessMessage&lt;/ns:CallbackUrl>
-					   &lt;!--Zero or more repetitions:-->
-					   &lt;ns:EventType>AcknowledgeServiceVisitAppointment&lt;/ns:EventType>
-					   &lt;ns:EventType>AcknowledgeServiceAppointmentConversion&lt;/ns:EventType>
-				  &lt;ns:EventType>ShowServiceVisit&lt;/ns:EventType>	
-					&lt;/ns:ServiceSubscription>
-				 &lt;/ns:ProcessServiceSubscriptionDataArea>
-			  &lt;/ns:ProcessServiceSubscription>
-			&lt;/tran:content>
-		&lt;/tran:payload>
+					   &lt;ns:CustomerParty>
+						  &lt;ns:SpecifiedPerson>
+							 &lt;!--Optional:-->
+							 &lt;ns:GivenName>QATEAM_VINHLE181208130956&lt;/ns:GivenName>
+							 &lt;!--Optional:-->
+							 &lt;ns:FamilyName>HOLDEN181208130956&lt;/ns:FamilyName>
+						   &lt;/ns:SpecifiedPerson>
+					   &lt;/ns:CustomerParty>
+					&lt;/ns:SearchCustomerInformationCriteria>
+				 &lt;/ns:SearchCustomerInformationDataArea>
+			  &lt;/ns:SearchCustomerInformation>
+			  &lt;!--Optional:-->
+		   &lt;/tran:content>
+            &lt;/tran:payload>
       &lt;/tran:ProcessMessage>
    &lt;/soapenv:Body>
 &lt;/soapenv:Envelope></soapBody>
    <soapHeader></soapHeader>
    <soapRequestMethod>SOAP</soapRequestMethod>
    <soapServiceFunction>ProcessMessage</soapServiceFunction>
-   <variables>
-      <defaultValue>GlobalVariable.Glb_Dealer_Code</defaultValue>
-      <description></description>
-      <id>167fe4fc-bb87-4827-891b-dbf8601e61ba</id>
-      <masked>false</masked>
-      <name>obj_DealerId</name>
-   </variables>
    <verificationScript>import static org.assertj.core.api.Assertions.*
 
 import com.kms.katalon.core.testobject.RequestObject

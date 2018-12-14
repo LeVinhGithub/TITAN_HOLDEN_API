@@ -31,5 +31,5 @@ import internal.GlobalVariable as GlobalVariable
 				 common.verifyExistCustomerAndVehicleInformationResponse(res_SearchServiceVisit,indexExpectedNode)
 				 common.verifyWholeAppointmentInformationWithOneJobline(res_SearchServiceVisit,indexExpectedNode)
 					 
-				 common.setStatusPassedForTestCaseWithTypeInput("get")
+				 common.setStatusPassedForTestCaseWithTypeInput("sea")
 			 }

@@ -49,8 +49,6 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 	proChange.setCustomerVehicleGlobalVariableForChangeCustomerVehicleCase()
 	proChange.setLaborCodeGlobalVariableForChangeLaborContentCase()
 	
-	common.printAllCurrentValueGlobalVariable()
-	
 //Declare response
 	ResponseObject res_ProcessServiceVisit = proChange.getResponseTestCaseProcessServiceVisitForChangeCase()
 	if(common.validateInvalidDealerCode(res_ProcessServiceVisit)){}

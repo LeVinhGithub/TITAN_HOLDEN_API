@@ -132,31 +132,35 @@ class ProcessService extends Library_Method_VinhLe{
 			println 'New value of Service End Date is: '+GlobalVariable.Glb_ServiceEndDate
 		}
 	}
-	
+
 	@Keyword
 	void setCustomerVehicleGlobalVariableForChangeCustomerVehicleCase() {
 		if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase()!='false'){
 			println 'This testcase is changing Customer & Vehicle Information'
 			if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='n')
 				setup.setValueNewCustomerForGlobalVariable()
-				else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='o'){
-					setup.setValueOldCustomerForGlobalVariable()
-				}
+			else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='o'){
+				setup.setValueOldCustomerForGlobalVariable()
+			}
 			if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(1)=='n')
 				setup.setValueNewVehicleForGlobalVariable()
-				else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(1)=='o'){
-					setup.setValueOldVehicleForGlobalVariable()
-				}
+			else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(1)=='o'){
+				setup.setValueOldVehicleForGlobalVariable()
+			}
 		}
 	}
-	
+
 	@Keyword
 	void setLaborCodeGlobalVariableForChangeLaborContentCase() {
 		if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase()!='false'){
 			println 'This testcase is changing Labor Content'
-			if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(0)=='n'){}
-				else if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(1)=='o'){}
+			if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(0)=='e')
+				setup.setValueExistOperationCodeForGlobalVariable(0)
+			else if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(0)=='n') setup.setValueNotExistOperationCodeForGlobalVariable(0)
+			
+			if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(1)=='e')
+				setup.setValueExistOperationCodeForGlobalVariable(1)
+			else if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(1)=='n') setup.setValueNotExistOperationCodeForGlobalVariable(1)
 		}
 	}
-	
 }

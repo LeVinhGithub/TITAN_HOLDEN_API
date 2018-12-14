@@ -147,7 +147,7 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyExistCustomerAndVehicleInformationResponseForChangeCase(ResponseObject response,Object globalVar){
+	void verifyExistCustomerAndVehicleInformationResponseForChangeCase(ResponseObject response){
 		if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='n')
 			verifyExistCustomerAndVehicleInformationResponse(response, true)
 			else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='o') 
@@ -169,17 +169,17 @@ class Common extends Library_Method_VinhLe{
 				" join CONTACT_ADDRESS CA on TE.CONTACT_KEY = CA.CONTACT_KEY join CONTACT_PHONE CP on TE.CONTACT_KEY = CP.CONTACT_KEY"+
 				" join CONTACT CO on TE.CONTACT_KEY = CO.CONTACT_KEY"+
 				" where TE.NAME = '"+GlobalVariable.Glb_FirstName+" "+GlobalVariable.Glb_LastName+ "'"
-		boolean stopCondition = false
+		//boolean stopCondition = false
 		sql.eachRow(queryCustomer) {row ->
-			if(!stopCondition){
+			//if(!stopCondition){
 				assert GlobalVariable.Glb_Cus_TradingEntity.toString() == row.TRADING_ENTITY_KEY as String
 				assert GlobalVariable.Glb_Cus_LineOne.toString() == row.STREET_LINE_1 as String
 				assert GlobalVariable.Glb_Cus_CityName.toString() == row.SUBURB as String
 				assert GlobalVariable.Glb_Cus_Postcode.toString() == row.POSTCODE as String
 				assert GlobalVariable.Glb_Cus_PhoneNumber.toString() == row.PHONE_NO as String
 				assert GlobalVariable.Glb_Cus_Email.toString() == row.EMAIL as String
-				stopCondition = true
-			}
+//				stopCondition = true
+//			}
 		}
 		String queryVehicle ="select * from VEHICLE where REGO_NO = '"+GlobalVariable.Glb_veh_ManufacturerName+"'"
 		sql.eachRow("select * from VEHICLE where REGO_NO = '"+GlobalVariable.Glb_veh_ManufacturerName+"'") {row ->
@@ -256,19 +256,17 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyWholeAppointmentInformationWithTwoJobline(ResponseObject response){
+	void verifyWholeAppointmentInformationForAddJoblineCase(ResponseObject response){
 		verifyWholeAppointmentInformationWithOneJobline(response)
-		verifyGeneralAppointmentJoblineBInformationResponse(response)
-		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
-			verifyJoblineWithOpCodeNotExistInformationResponse(response,1 )
-		else verifyJoblineWithOpCodeExistInformationResponse(response, 1)
+		verifyGeneralAppointmentJoblineInformationResponseForAddJoblineCase(response)
+		verifyJoblineInformationResponseForAddJoblineCase(response)
 	}
 	
 	@Keyword
 	void verifyWholeAppointmentInformationForChangeCase(ResponseObject response){
-		if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='true')
+		if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()!='true')
 			verifyWholeAppointmentInformationWithOneJobline(response)
-			else verifyWholeAppointmentInformationWithTwoJobline(response)
+			else verifyWholeAppointmentInformationForAddJoblineCase(response)
 	}
 
 	@Keyword
@@ -313,9 +311,12 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyGeneralAppointmentJoblineBInformationResponse(ResponseObject response){
+	void verifyGeneralAppointmentJoblineInformationResponseForAddJoblineCase(ResponseObject response){
 		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "B", 1, 0)
 		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 1, 0)
+		
+		verifyValueSOAPNode(response, "RequestedService", "JobNumberString", "C", 2, 0)
+		verifyValueSOAPNode(response, "RequestedService", "JobTypeString", "Customer Pay", 2, 0)
 	}
 
 	@Keyword
@@ -338,6 +339,19 @@ class Common extends Library_Method_VinhLe{
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", '', noJobline, 0)
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
 		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", GlobalVariable.Glb_Ser_LaborDescription, noJobline, 0)
+	}
+	
+	@Keyword
+	void verifyJoblineInformationResponseForAddJoblineCase(ResponseObject response){
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", 'S105I', 1, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", 'S105I', 1, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", 'GENERIC - Carry out 105,000km intermediate service', 1, 0)
+		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", 'GENERIC - Carry out 105,000km intermediate service', 1, 0)
+		
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", '', 2, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", '', 2, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", 'INVALID - CHANGE - GENERIC - Carry out 105,000km intermediate service', 2, 0)
+		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", 'INVALID - CHANGE - GENERIC - Carry out 105,000km intermediate service', 2, 0)
 	}
 
 	@Keyword

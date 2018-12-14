@@ -23,5 +23,5 @@ import holdenObject.SubscriptionProcess
 			 common.verifyApplicationAreaResponse(res_SubscriptionDetact)
 			 proSub.verifyServiceSubscriptionSectionResponse(res_SubscriptionDetact)
 				 
-			 common.setStatusPassedForTestCaseWithTypeInput("suba")
+			 common.setStatusPassedForTestCaseWithTypeInput("subd")
 		 }

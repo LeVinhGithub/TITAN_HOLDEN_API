@@ -18,6 +18,7 @@ import holdenObject.GetIntegration
 	 GetIntegration getInt = new GetIntegration()
 //TEST CASE
 	 res_IntegrationConfig = getInt.getResponseTestCaseIntegrationConfig()
+	 
 	 if(common.validateInvalidDealerCode(res_IntegrationConfig)){}
 	 	else{
 			 common.verifyStatusCodeIs200OK(res_IntegrationConfig)
