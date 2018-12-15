@@ -159,8 +159,8 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 			println 'Exist Operation Code changed to: '+GlobalVariable.Glb_Ser_LaborCode
 		}
 		if(indicator == 1) {
-			GlobalVariable.Glb_Ser_LaborCode = 'GENERIC - Carry out 105,000km intermediate service'
-			println 'Not Exist Operation Code changed to: '+GlobalVariable.Glb_Ser_LaborCode
+			GlobalVariable.Glb_Ser_LaborDescription = 'GENERIC - Carry out 105,000km intermediate service'
+			println 'Exist Operation Description changed to: '+GlobalVariable.Glb_Ser_LaborDescription
 		}
 
 	}
@@ -168,8 +168,8 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 	@Keyword
 	void setValueNotExistOperationCodeForGlobalVariable(int indicator){
 		if(indicator == 0) {
-			GlobalVariable.Glb_Ser_LaborDescription = 'INVALID - CHANGE'
-			println 'Exist Operation Description changed to: '+GlobalVariable.Glb_Ser_LaborDescription
+			GlobalVariable.Glb_Ser_LaborCode = 'INVALID - CHANGE'
+			println 'Not Exist Operation Code changed to: '+GlobalVariable.Glb_Ser_LaborCode
 		}
 		if(indicator == 1) {
 			GlobalVariable.Glb_Ser_LaborDescription = 'INVALID - CHANGE - GENERIC - Carry out 75,000km intermediate service'

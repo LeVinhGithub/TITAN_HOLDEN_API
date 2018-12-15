@@ -4,6 +4,7 @@ import com.kms.katalon.core.testobject.ResponseObject as ResponseObject
 
 import holdenObject.Common
 import holdenObject.GetCustomerInformation
+import internal.GlobalVariable
 
 /**
  * V0. Create framework 09/10/18
@@ -24,8 +25,11 @@ import holdenObject.GetCustomerInformation
 			 common.verifyStatusCodeIs200OK(res_SearchCustomerInformation)
 			 common.verifyApplicationAreaResponse(res_SearchCustomerInformation)
 			 getCus.verifySearchNotExistCustomerResponse(res_SearchCustomerInformation)
-			 common.verifyOldCustomerInformationResponse(res_SearchCustomerInformation)
-			 common.verifyVehicleInformationResponse(res_SearchCustomerInformation)
-			 common.verifyCustomerAndVehicleInformationBySQL()
+			 if(GlobalVariable.Glb_CustomerType.toString().toLowerCase()=='old'){
+				 common.verifyOldCustomerInformationResponse(res_SearchCustomerInformation)
+				 common.verifyVehicleInformationResponse(res_SearchCustomerInformation)
+				 common.verifyCustomerAndVehicleInformationBySQL()
+			 }
+			 
 			 common.setStatusPassedForTestCaseWithTypeInput("cus")
 		 }

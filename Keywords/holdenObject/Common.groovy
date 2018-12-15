@@ -228,7 +228,7 @@ class Common extends Library_Method_VinhLe{
 		verifyBookingIdResponse(response)
 		verifyTimeAppointmentInformationResponse(response)
 		verifyGeneralAppointmentJoblineAInformationResponse(response)
-		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
+		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase().contains('invalid'))
 			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
 		else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
 	}
@@ -239,7 +239,7 @@ class Common extends Library_Method_VinhLe{
 		verifyBookingIdResponse(response)
 		verifyTimeAppointmentInformationResponse(response,isCancelled)
 		verifyGeneralAppointmentJoblineAInformationResponse(response)
-		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase()=='invalid')
+		if(GlobalVariable.Glb_Ser_LaborCode.toString().toLowerCase().contains('invalid'))
 			verifyJoblineWithOpCodeNotExistInformationResponse(response, 0)
 		else verifyJoblineWithOpCodeExistInformationResponse(response, 0)
 	}

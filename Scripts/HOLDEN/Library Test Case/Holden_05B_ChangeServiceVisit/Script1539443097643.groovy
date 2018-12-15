@@ -48,6 +48,7 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 	proChange.setDateGlobalVariableForChangeDateCase()
 	proChange.setCustomerVehicleGlobalVariableForChangeCustomerVehicleCase()
 	proChange.setLaborCodeGlobalVariableForChangeLaborContentCase()
+	common.printAllCurrentValueGlobalVariable()
 	
 //Declare response
 	ResponseObject res_ProcessServiceVisit = proChange.getResponseTestCaseProcessServiceVisitForChangeCase()
