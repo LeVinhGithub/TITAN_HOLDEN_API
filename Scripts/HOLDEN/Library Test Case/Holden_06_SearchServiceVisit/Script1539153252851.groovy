@@ -23,13 +23,14 @@ import internal.GlobalVariable as GlobalVariable
 	 res_SearchServiceVisit = searchSer.getResponseTestCaseSearchServiceInformation()
 	 if(common.validateInvalidDealerCode(res_SearchServiceVisit)){}
 	 	else if(common.validateStartTimeAfterEndDate(res_SearchServiceVisit, GlobalVariable.Glb_StartSearchDate, GlobalVariable.Glb_StartSearchDate)){}
-		 	else{
-				 common.verifyStatusCodeIs200OK(res_SearchServiceVisit)
-				 common.verifyApplicationAreaResponse(res_SearchServiceVisit)
-				 
-				 indexExpectedNode = searchSer.getIndexOfExpectedROInDOM(res_SearchServiceVisit)
-				 common.verifyExistCustomerAndVehicleInformationResponse(res_SearchServiceVisit,indexExpectedNode)
-				 common.verifyWholeAppointmentInformationWithOneJobline(res_SearchServiceVisit,indexExpectedNode)
+		 	//else if(common.validateStartTimeInPast(res_SearchServiceVisit, GlobalVariable.Glb_StartSearchDate)){}
+			 	else{
+					 common.verifyStatusCodeIs200OK(res_SearchServiceVisit)
+					 common.verifyApplicationAreaResponse(res_SearchServiceVisit)
 					 
-				 common.setStatusPassedForTestCaseWithTypeInput("sea")
-			 }
+					 indexExpectedNode = searchSer.getIndexOfExpectedROInDOM(res_SearchServiceVisit)
+					 common.verifyExistCustomerAndVehicleInformationResponse(res_SearchServiceVisit,indexExpectedNode)
+					 common.verifyWholeAppointmentInformationWithOneJobline(res_SearchServiceVisit,indexExpectedNode)
+						 
+					 common.setStatusPassedForTestCaseWithTypeInput("sea")
+				 }

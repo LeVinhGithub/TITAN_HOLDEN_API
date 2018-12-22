@@ -91,7 +91,7 @@
 											&lt;ns:Postcode>${obj_PostCode}&lt;/ns:Postcode>
 											&lt;ns:StateOrProvinceCountrySub-DivisionID>${obj_State}&lt;/ns:StateOrProvinceCountrySub-DivisionID>
 										&lt;/ns:ResidenceAddress>
-										&lt;ns:TelephoneCommunication>
+										
 											&lt;ns:TelephoneCommunication>
 												&lt;ns:ChannelCode>WORKPHONE&lt;/ns:ChannelCode>
 												&lt;ns:CompleteNumber>${obj_PhoneNumber}&lt;/ns:CompleteNumber>
@@ -104,7 +104,7 @@
 												&lt;ns:ChannelCode>HOMEPHONE&lt;/ns:ChannelCode>
 												&lt;ns:CompleteNumber>${obj_PhoneNumber}&lt;/ns:CompleteNumber>
 											&lt;/ns:TelephoneCommunication>
-										&lt;/ns:TelephoneCommunication>			
+												
 										&lt;ns:URICommunication>
 											&lt;ns:URIID>${obj_Email}&lt;/ns:URIID>
 											&lt;ns:ChannelCode>EMAIL&lt;/ns:ChannelCode>

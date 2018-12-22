@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>Holden_All_Sprint</name>
+   <name>Holden_All_Sprint - P1</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-12-15T14:14:18</lastRun>
+   <lastRun>2018-12-21T09:21:13</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
@@ -20,8 +20,8 @@
          <combinationType>ONE</combinationType>
          <id>43fac44a-7ffe-4368-a07c-990e928473ca</id>
          <iterationEntity>
-            <iterationType>SPECIFIC</iterationType>
-            <value>10</value>
+            <iterationType>RANGE</iterationType>
+            <value>54-254</value>
          </iterationEntity>
          <testDataId>Data Files/Holden/Holden_DATA_DRIVEN</testDataId>
       </testDataLink>

@@ -13,6 +13,7 @@ import org.sikuli.api.API
 import com.kms.katalon.core.annotation.TearDown
 import com.kms.katalon.core.annotation.TearDownIfError
 import com.kms.katalon.core.annotation.TearDownIfFailed
+import com.kms.katalon.core.annotation.TearDownIfPassed
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.checkpoint.CheckpointFactory as CheckpointFactory
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as MobileBuiltInKeywords
@@ -133,62 +134,20 @@ if(var_Status_Subscription == 'true'){
 
 @TearDownIfError
 public void printLineError(){
+	println "Testcase is ERRORED"
 	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.write2File'(var_LineNumber as String, "Error")
 }
 
 @TearDownIfFailed
 public void printLineFailed(){
+	println "Testcase is FAILED"
 	CustomKeywords.'qaVinhLe.Library_Method_VinhLe.write2File'(var_LineNumber as String, "Failed")
 }
 
 	
-@TearDown
-public void HandleFailing(){
-	//Handle GetOperationCode for case all = TRUE
-	if(var_Status_GetIntegration == 'true'
-		&& var_Status_GetCustomer == 'true'
-		&& var_Status_GetPersonel == 'true'
-		&& var_Status_GetLaborCode == 'true'
-		&& var_Status_ProcessServiceAdd == 'true'
-		&& var_Status_ProcessServiceChange == 'true'
-		&& var_Status_ProcessServiceDelete == 'true'
-		&& var_Status_SearchService == 'true'
-		&& var_Status_GetService == 'true'
-		&& var_Status_Subscription == 'true'){
-		if(!(GlobalVariable.Glb_Status_Integration == "passed"))	println "Test Case GetIntegration: FAILED"
-			else{
-				println "Test Case GetIntegration: PASSED"
-				if(GlobalVariable.Glb_Status_GetCustomer == "passed") {
-					println "Test Case GetCustomer: PASSED"
-					if(GlobalVariable.Glb_Status_GetAdvisor == "passed"){
-						println "Test Case GetAdvisor: PASSED"
-						if(GlobalVariable.Glb_Status_GetLabor== "passed"){
-							println "Test Case GetLaborCode: PASSED"
-							if(GlobalVariable.Glb_Status_ProcessAdd== "passed"){
-								println "Test Case ProcessServiceAdd: PASSED"
-								if(GlobalVariable.Glb_Status_SearchService== "passed"){
-									println "Test Case SearchService: PASSED"
-									if(GlobalVariable.Glb_Status_GetService== "passed"){
-										println "Test Case GetService: PASSED"
-										if(GlobalVariable.Glb_Status_ProcessChange== "passed"){
-											println "Test Case ProcessServiceChange: PASSED"
-											if(GlobalVariable.Glb_Status_ProcessDelete== "passed"){
-												println "Test Case ProcessServiceDelete: PASSED"
-												if(GlobalVariable.Glb_Status_SubscriptionAdd== "passed"){
-													println "Test Case SubscriptionAdd: PASSED"
-													if(GlobalVariable.Glb_Status_SubscriptionDetact== "passed"){
-														println "Test Case SubscriptionDetact: PASSED"
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-	}
+@TearDownIfPassed
+public void NotificationPassed(){
+	println "Testcase is PASSED"
 }
+
 		

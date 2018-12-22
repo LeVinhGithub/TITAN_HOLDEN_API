@@ -23,15 +23,16 @@ import internal.GlobalVariable as GlobalVariable
 	 if(common.validateInvalidDealerCode(res_ProcessServiceVisit)){}
 	 	else if(proAdd.validateInvalidAdvisor(res_ProcessServiceVisit)){}
 		 	else if(common.validateStartTimeAfterEndDate(res_ProcessServiceVisit, GlobalVariable.Glb_ServiceDate, GlobalVariable.Glb_ServiceEndDate)){}
-			 	else{
-					 common.verifyStatusCodeIs200OK(res_ProcessServiceVisit)
-					 GlobalVariable.Glb_BookingStatus = "current"
-					 common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
-					 common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
-					 common.setBookingIdFromResponseToGlobalVariable(res_ProcessServiceVisit)
-					 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,true)
-					 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessServiceVisit)
-					 
-					 common.verifyCustomerAndVehicleInformationBySQL()
-					 common.setStatusPassedForTestCaseWithTypeInput("add")
-				 }
+			 	//else if(common.validateStartTimeInPast(res_ProcessServiceVisit, GlobalVariable.Glb_ServiceDate)){}
+				 	else{
+						 common.verifyStatusCodeIs200OK(res_ProcessServiceVisit)
+						 GlobalVariable.Glb_BookingStatus = "current"
+						 common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
+						 common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
+						 common.setBookingIdFromResponseToGlobalVariable(res_ProcessServiceVisit)
+						 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,true)
+						 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessServiceVisit)
+						 
+						 common.verifyCustomerAndVehicleInformationBySQL()
+						 common.setStatusPassedForTestCaseWithTypeInput("add")
+					 }

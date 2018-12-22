@@ -27,9 +27,7 @@ import internal.GlobalVariable as GlobalVariable
 				 common.verifyStatusCodeIs200OK(res_GetServiceVisit)
 				 common.verifyApplicationAreaResponse(res_GetServiceVisit)
 				 common.verifyExistCustomerAndVehicleInformationResponse(res_GetServiceVisit,false)
-				 if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase()=='false')
-				 	common.verifyWholeAppointmentInformationWithOneJobline(res_GetServiceVisit)
-					 else common.verifyWholeAppointmentInformationWithTwoJobline(res_GetServiceVisit)
+				 common.verifyWholeAppointmentInformationWithOneJobline(res_GetServiceVisit)
 					 
 				 common.setStatusPassedForTestCaseWithTypeInput("get")
 			 }

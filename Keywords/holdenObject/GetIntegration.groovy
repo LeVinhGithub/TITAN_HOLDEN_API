@@ -53,7 +53,7 @@ class GetIntegration extends Library_Method_VinhLe{
 
 	@Keyword
 	void verifyIntegrationConfig(ResponseObject response){
-		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "SyncMode", "ASYNCHRONOUS", 0, 0)
+		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "SyncMode", "SYNCHRONOUS", 0, 0)
 		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentsUpdatable", "true", 0, 0)
 		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentCustomerUpdatable", "true", 0, 0)
 		verifyValueSOAPNode(response, "IntegrationConfigurationDetail", "AppointmentVehicleUpdatable", "true", 0, 0)
