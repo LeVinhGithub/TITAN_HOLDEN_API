@@ -158,10 +158,10 @@
 											&lt;ns:JobTypeString>Customer Pay&lt;/ns:JobTypeString>
 											&lt;ns:ServiceLaborScheduling>
 												&lt;ns:LaborOperationID>2&lt;/ns:LaborOperationID>
-												&lt;ns:LaborOperationIdTypeCode>S105I&lt;/ns:LaborOperationIdTypeCode>
-												&lt;ns:LaborOperationDescription>GENERIC - Carry out 105,000km intermediate service&lt;/ns:LaborOperationDescription>
+												&lt;ns:LaborOperationIdTypeCode>S105&lt;/ns:LaborOperationIdTypeCode>
+												&lt;ns:LaborOperationDescription>GENERIC - Carry out 105,000km service as per handbook.&lt;/ns:LaborOperationDescription>
 											&lt;/ns:ServiceLaborScheduling>
-											&lt;ns:CustomerSalesRequestDescription>GENERIC - Carry out 105,000km intermediate service&lt;/ns:CustomerSalesRequestDescription>
+											&lt;ns:CustomerSalesRequestDescription>GENERIC - Carry out 105,000km service as per handbook.&lt;/ns:CustomerSalesRequestDescription>
 										&lt;/ns:RequestedService>
                                       
                                       	&lt;ns:RequestedService>

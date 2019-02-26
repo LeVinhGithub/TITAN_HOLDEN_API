@@ -128,11 +128,11 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 
 	@Keyword
 	void setValueOldCustomerForGlobalVariable(){
-		GlobalVariable.Glb_Cus_TradingEntity = '678819'
+		GlobalVariable.Glb_Cus_TradingEntity = '1173278'
 		println 'Old Customer Trading Entity: '+GlobalVariable.Glb_Cus_TradingEntity
-		GlobalVariable.Glb_FirstName = 'QATEAM_VINHLE181208130956'
+		GlobalVariable.Glb_FirstName = 'QATEAM_VINHLE190125131028'
 		println 'Old Customer First Name: '+GlobalVariable.Glb_FirstName
-		GlobalVariable.Glb_LastName = 'HOLDEN181208130956'
+		GlobalVariable.Glb_LastName = 'HOLDEN190125131028'
 		println 'Old Customer Last Name: '+GlobalVariable.Glb_LastName
 	}
 
@@ -146,20 +146,20 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 
 	@Keyword
 	void setValueOldVehicleForGlobalVariable(){
-		GlobalVariable.Glb_veh_ManufacturerName = 'REGNUMBER181208130956'
+		GlobalVariable.Glb_veh_ManufacturerName = 'REGNUMBER190125131028'
 		println 'Old Vehicle Rego: '+GlobalVariable.Glb_veh_ManufacturerName
-		GlobalVariable.Glb_veh_VehicleId = 'VNVNV181208130956'
+		GlobalVariable.Glb_veh_VehicleId = 'VNVNV190125131028'
 		println 'Old Vehicle VIN: '+GlobalVariable.Glb_veh_VehicleId
 	}
 
 	@Keyword
 	void setValueExistOperationCodeForGlobalVariable(int indicator){
 		if(indicator == 0) {
-			GlobalVariable.Glb_Ser_LaborCode = 'S105I'
+			GlobalVariable.Glb_Ser_LaborCode = 'S105'
 			println 'Exist Operation Code changed to: '+GlobalVariable.Glb_Ser_LaborCode
 		}
 		if(indicator == 1) {
-			GlobalVariable.Glb_Ser_LaborDescription = 'GENERIC - Carry out 105,000km intermediate service'
+			GlobalVariable.Glb_Ser_LaborDescription = 'GENERIC - Carry out 105,000km service as per handbook.'
 			println 'Exist Operation Description changed to: '+GlobalVariable.Glb_Ser_LaborDescription
 		}
 
@@ -246,21 +246,40 @@ class SetupAndSetVariable extends Library_Method_VinhLe{
 		closeSQLConnection(conn, sql)
 	}
 
+	//FOR HOLDEN WINDSOR
 	@Keyword
 	void setThirdPartyAppointmentConfirmationKey(){
-		String cmdQuery = "select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING"
-		String valueKey = ""
+		String cmdQuery = "select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING "
+		String valueKey = "0"
 		Connection conn = createSQLConnection()
 		def sql = new Sql(conn)
-		sql.eachRow("select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING") {row ->
+		sql.eachRow(cmdQuery) {row ->
 			String valueKeyTemp = row.THIRD_PARTY_APPOINTMENT_CONFIRMATION_KEY as String
-			if(valueKeyTemp == "xxx")
-				GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
-			else valueKey = valueKeyTemp
+			if((valueKeyTemp as Integer) > (valueKey as Integer))
+				valueKey = valueKeyTemp
 		}
+		GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
 		println 'Documentation ID is: '+GlobalVariable.Glb_DocumentId
 		closeSQLConnection(conn, sql)
 	}
+
+	//	FOR HOLDEN BMG
+	//	@Keyword
+	//	void setThirdPartyAppointmentConfirmationKey(){
+	//		String cmdQuery = "select * from THIRD_PARTY_APPOINTMENT_KEY_MAPPING "+
+	//							"ORDER BY THIRD_PARTY_APPOINTMENT_CONFIRMATION_KEY DESC"
+	//		String valueKey = ""
+	//		Connection conn = createSQLConnection()
+	//		def sql = new Sql(conn)
+	//		sql.eachRow(cmdQuery) {row ->
+	//			String valueKeyTemp = row.THIRD_PARTY_APPOINTMENT_CONFIRMATION_KEY as String
+	//			if(valueKeyTemp == "xxx")
+	//				GlobalVariable.Glb_DocumentId = (valueKey as Integer) + 1
+	//			else valueKey = valueKeyTemp
+	//		}
+	//		println 'Documentation ID is: '+GlobalVariable.Glb_DocumentId
+	//		closeSQLConnection(conn, sql)
+	//	}
 
 	@Keyword
 	String getMakeCodeFromMakeTableSQL(Connection connection){

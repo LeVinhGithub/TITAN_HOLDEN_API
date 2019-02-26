@@ -23,9 +23,9 @@
          &lt;!--Optional:-->
          &lt;wsse:UsernameToken wsu:Id=&quot;UsernameToken-736fa6d4-6cda-4f4f-b8e6-2c068ede4cf2&quot;>
             &lt;!--Optional:-->
-            &lt;wsse:Username>sysad&lt;/wsse:Username>
+            &lt;wsse:Username>holdn&lt;/wsse:Username>
             &lt;!--Optional:-->
-            &lt;wsse:Password Type=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText&quot;>3IZgX1GQSGH2qsIMZ5o39Q==&lt;/wsse:Password>
+            &lt;wsse:Password Type=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText&quot;>holdntesting&lt;/wsse:Password>
             &lt;!--Optional:-->
             &lt;wsse:Nonce EncodingType=&quot;http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary&quot;>sysad&lt;/wsse:Nonce>
             &lt;wsu:Created>2018-11-30T13:21:12Z&lt;/wsu:Created>

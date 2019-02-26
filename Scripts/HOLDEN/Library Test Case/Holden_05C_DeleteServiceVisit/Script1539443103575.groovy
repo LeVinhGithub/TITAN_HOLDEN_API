@@ -26,7 +26,7 @@ import internal.GlobalVariable as GlobalVariable
 			 common.verifyStatusCodeIs200OK(res_ProcessService)
 			 common.verifyApplicationAreaResponse(res_ProcessService)
 			 common.verifyAcknowledgeServiceAreaResponse(res_ProcessService)
-			 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessService,false)
+			 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessService,false,false)
 			 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessService,true)
 			 common.setStatusPassedForTestCaseWithTypeInput("del")
 		 }

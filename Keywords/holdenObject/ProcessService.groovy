@@ -83,6 +83,9 @@ class ProcessService extends Library_Method_VinhLe{
 		if(GlobalVariable.Glb_AddJobLine.toString().toLowerCase() == 'true')
 			objectRepo = "Holden/Holden_05B_ChangeServiceVisit_AddOpCode"
 
+		if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0) == 'o')
+			setup.setValueOldCustomerForGlobalVariable()
+
 		RequestObject ProcessServiceVisit = findTestObject(objectRepo, [
 			('obj_DealerCode') : GlobalVariable.Glb_Dealer_Code,
 			('Obj_GivenName') : GlobalVariable.Glb_FirstName,
@@ -157,7 +160,7 @@ class ProcessService extends Library_Method_VinhLe{
 			if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(0)=='e')
 				setup.setValueExistOperationCodeForGlobalVariable(0)
 			else if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(0)=='n') setup.setValueNotExistOperationCodeForGlobalVariable(0)
-			
+
 			if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(1)=='e')
 				setup.setValueExistOperationCodeForGlobalVariable(1)
 			else if(GlobalVariable.Glb_ChangeChangeOpCodeContent.toString().toLowerCase().charAt(1)=='n') setup.setValueNotExistOperationCodeForGlobalVariable(1)

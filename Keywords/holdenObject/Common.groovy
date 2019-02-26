@@ -81,8 +81,16 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void verifyOldCustomerInformationResponse(ResponseObject response){
 		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_DocumentId.toString(), 0, 0)
-		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
-		verifyValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", GlobalVariable.Glb_Cus_TradingEntity, 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", GlobalVariable.Glb_Cus_TradingEntity.toString(), 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", GlobalVariable.Glb_Cus_TradingEntity.toString(), 0, 0)
+		verifyCustomerAddressInformationResponse(response)
+		verifyCustomerContactInformationResponse(response)
+	}
+	@Keyword
+	void verifyExistCustomerInformationResponse(ResponseObject response){
+		verifyValueSOAPNode(response, "DocumentIdentification", "DocumentID", GlobalVariable.Glb_DocumentId.toString(), 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "dealerManagementSystemIDField", "1173278", 0, 0)
+		verifyValueSOAPNode(response, "AppointmentContactParty", "DealerManagementSystemID", "1173278", 0, 0)
 		verifyCustomerAddressInformationResponse(response)
 		verifyCustomerContactInformationResponse(response)
 	}
@@ -150,9 +158,10 @@ class Common extends Library_Method_VinhLe{
 	}
 
 	@Keyword
-	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response,boolean isTradingEntityNull){
+	void verifyExistCustomerAndVehicleInformationResponse(ResponseObject response,boolean isTradingEntityNull, boolean isChangeProcess){
 		if(isTradingEntityNull)
 			verifyNewCustomerInformationResponse(response)
+		else if(isChangeProcess) verifyExistCustomerInformationResponse(response)
 		else verifyOldCustomerInformationResponse(response)
 		verifyVehicleInformationResponse(response)
 	}
@@ -160,9 +169,9 @@ class Common extends Library_Method_VinhLe{
 	@Keyword
 	void verifyExistCustomerAndVehicleInformationResponseForChangeCase(ResponseObject response){
 		if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='n')
-			verifyExistCustomerAndVehicleInformationResponse(response, true)
+			verifyExistCustomerAndVehicleInformationResponse(response, true, true)
 		else if(GlobalVariable.Glb_ChangeChangeCustomerVehicle.toString().toLowerCase().charAt(0)=='o')
-			verifyExistCustomerAndVehicleInformationResponse(response, false)
+			verifyExistCustomerAndVehicleInformationResponse(response, false,true)
 	}
 
 	@Keyword
@@ -355,10 +364,10 @@ class Common extends Library_Method_VinhLe{
 
 	@Keyword
 	void verifyJoblineInformationResponseForAddJoblineCase(ResponseObject response){
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", 'S105I', 1, 0)
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", 'S105I', 1, 0)
-		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", 'GENERIC - Carry out 105,000km intermediate service', 1, 0)
-		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", 'GENERIC - Carry out 105,000km intermediate service', 1, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", 'S105', 1, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", 'S105', 1, 0)
+		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationDescription", 'GENERIC - Carry out 105,000km service as per handbook.', 1, 0)
+		verifyValueSOAPNode(response, "RequestedService", "CustomerSalesRequestDescription", 'GENERIC - Carry out 105,000km service as per handbook.', 1, 0)
 
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationID", '', 2, 0)
 		verifyValueSOAPNode(response, "ServiceLaborScheduling", "LaborOperationIdTypeCode", '', 2, 0)

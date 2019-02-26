@@ -19,8 +19,8 @@
          <combinationType>ONE</combinationType>
          <id>43fac44a-7ffe-4368-a07c-990e928473ca</id>
          <iterationEntity>
-            <iterationType>SPECIFIC</iterationType>
-            <value>55</value>
+            <iterationType>RANGE</iterationType>
+            <value>647-710</value>
          </iterationEntity>
          <testDataId>Data Files/Holden/Holden_DATA_DRIVEN</testDataId>
       </testDataLink>

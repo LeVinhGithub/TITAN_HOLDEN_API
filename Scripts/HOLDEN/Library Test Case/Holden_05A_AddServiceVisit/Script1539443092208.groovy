@@ -25,12 +25,13 @@ import internal.GlobalVariable as GlobalVariable
 		 	else if(common.validateStartTimeAfterEndDate(res_ProcessServiceVisit, GlobalVariable.Glb_ServiceDate, GlobalVariable.Glb_ServiceEndDate)){}
 			 	//else if(common.validateStartTimeInPast(res_ProcessServiceVisit, GlobalVariable.Glb_ServiceDate)){}
 				 	else{
+						 //common.printErrorMessageforProcessService(res_ProcessServiceVisit)
 						 common.verifyStatusCodeIs200OK(res_ProcessServiceVisit)
 						 GlobalVariable.Glb_BookingStatus = "current"
 						 common.verifyApplicationAreaResponse(res_ProcessServiceVisit)
 						 common.verifyAcknowledgeServiceAreaResponse(res_ProcessServiceVisit)
 						 common.setBookingIdFromResponseToGlobalVariable(res_ProcessServiceVisit)
-						 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,true)
+						 common.verifyExistCustomerAndVehicleInformationResponse(res_ProcessServiceVisit,true,false)
 						 common.verifyWholeAppointmentInformationWithOneJobline(res_ProcessServiceVisit)
 						 
 						 common.verifyCustomerAndVehicleInformationBySQL()

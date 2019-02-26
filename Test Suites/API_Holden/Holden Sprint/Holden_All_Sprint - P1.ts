@@ -4,7 +4,6 @@
    <name>Holden_All_Sprint - P1</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-12-21T09:21:13</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
@@ -21,7 +20,7 @@
          <id>43fac44a-7ffe-4368-a07c-990e928473ca</id>
          <iterationEntity>
             <iterationType>RANGE</iterationType>
-            <value>54-254</value>
+            <value>56-254</value>
          </iterationEntity>
          <testDataId>Data Files/Holden/Holden_DATA_DRIVEN</testDataId>
       </testDataLink>
